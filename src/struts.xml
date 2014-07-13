@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<constant name="struts.i18n.encoding" value="UTF-8"/>
+	<constant name="struts.ui.theme" value="simple" />
+	<constant name="struts.multipart.maxSize" value="10701096"/>
+	 
+
+	<package name="action" extends="struts-default">	
+	
+		 <interceptors>
+		    <interceptor name="LoginInterceptor" class="com.lvg.interceptor.LoginActionInterceptor"></interceptor>
+			<interceptor-stack name="loginStack">		
+				<interceptor-ref name="defaultStack"></interceptor-ref>		
+				<interceptor-ref name="LoginInterceptor"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors>	 
+
+		<action name="HomeAction" class="com.lvg.action.HomeAction" method="ShowImageAction">
+			<result name="success" >home2.jsp</result>
+			<result name="input">index.jsp</result>
+			<!-- <interceptor-ref name="loginStack"></interceptor-ref> -->
+		</action>
+		
+		<action name="CheckLoginAction" class="com.lvg.action.UserAction" method="CheckLoginAction">
+			<result name="success" type="redirect">home.jsp</result>
+			<result name="input">index.jsp</result>
+		</action>
+		
+	</package>	
+	
+	<package name="ajax" extends="json-default">
+		<action name="HomeActionAjax" class="com.lvg.action.HomeAction" method="ShowImageActionAjax">
+			<result type="json"></result>
+		</action>
+	</package>
+</struts>
