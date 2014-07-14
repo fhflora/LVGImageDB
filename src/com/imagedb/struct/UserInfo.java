@@ -40,4 +40,98 @@ public class UserInfo {
 		createTime = null;
 		lastLoginTime = null;
 	}
+	public UserInfo(int userID){
+		this.nID=userID;
+	}
+	public int getUserID() {
+		return nID;
+	}
+	public void setUserID(int userID) {
+		this.nID = userID;
+	}
+	public String getUserName() {
+		return strUserName;
+	}
+	public void setUserName(String userName) {
+		this.strUserName = userName;
+	}
+	public String getPassword() {
+		return strPassword;
+	}
+	public void setPassword(String password) {
+		this.strPassword = password;
+	}
+	public byte getUserType() {
+		return nType;
+	}
+	public void setUserType(byte userType) {
+		this.nType = userType;
+	}
+	public byte getPermission() {
+		return this.nPermission;
+	}
+	public void setPermission(byte permissoin) {
+		this.nPermission = permissoin;
+	}
+	public String getRealName() {
+		return strRealName;
+	}
+	public void setRealName(String realName) {
+		this.strRealName = realName;
+	}
+	public String getTel() {
+		return strPhone;
+	}
+	public void setTel(String tel) {
+		this.strPhone = tel;
+	}
+	public String getEmail() {
+		return strEmail;
+	}
+	public void setEmail(String email) {
+		this.strEmail = email;
+	}
+	public String getCreatedBy() {
+		return strCreated;
+	}
+	public void setCreatedBy(String createdBy) {
+		this.strCreated = createdBy;
+	}
+	public Date getCreateTime() {
+		return createTime;
+	}
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
+	/**
+	 * 登录为 0  未登录为1
+	 * @return
+	 */
+	public byte getState() {
+		return nState;
+	}
+	public void setState(byte state) {
+		this.nState = state;
+	}
+	public Date getLastTime() {
+		return lastLoginTime;
+	}
+	public void setLastTime(Date strDate) {
+		this.lastLoginTime = strDate;
+	}
+	public String getLoginIP() {
+		return strLastLoginIP;
+	}
+	public void setLoginIP(String loginIP) {
+		this.strLastLoginIP = loginIP;
+	}
+	public String getRemark() {
+		return strRemark;
+	}
+	public void setRemark(String remark) {
+		this.strRemark = remark;
+	}
+	
+
+	
 }

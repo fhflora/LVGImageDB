@@ -5,13 +5,16 @@ import java.util.Map;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.SessionAware;
 
-import com.lvg.entity.User;
+import com.imagedb.struct.UserInfo;
 import com.opensymphony.xwork2.ActionSupport;
+import com.imagedb.UserManage;
+import com.lvg.database.*;
 
 public class UserAction extends ActionSupport implements SessionAware{
-	public User user;
+	public UserInfo user;
 	private Map<String,Object> session;
 	private String certCode;
+	private UserManage userManage;
 	
 	public String CheckLoginAction(){
 		String  message="验证码错误，请重新输入！";
@@ -29,7 +32,13 @@ public class UserAction extends ActionSupport implements SessionAware{
 			return INPUT;
 		}
 		//添加访问数据库语句  验证用户
-		if(user.getUserName().equals("admin")&&user.getPassword().equals("admin")){
+		
+		userManage=new UserManage(GetConnection.getConn());
+		
+		
+		if(userManage.loginCheck("fz", "fz123", 1)!=-1){
+			user=(UserInfo) userManage.getUserInfo(userManage.loginCheck("fz", "fz123", 1));
+			user.setState((byte) 0);
 			session.put("user", user);
 			session.put("username", user.getUserName());
 			session.put("lvg_login", true);
@@ -52,10 +61,10 @@ public class UserAction extends ActionSupport implements SessionAware{
 	}
 	
 
-	public User getUser() {
+	public UserInfo getUser() {
 		return user;
 	}
-	public void setUser(User user) {
+	public void setUser(UserInfo user) {
 		this.user = user;
 	}
 

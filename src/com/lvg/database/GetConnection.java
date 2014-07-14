@@ -13,9 +13,9 @@ public class GetConnection {
 	protected ResultSet rs = null;//查询结果集
 	
 	private static final String DRIVER = "org.postgresql.Driver";//加载数据库驱动的字符串
-	private static final String URL = "jdbc:postgresql://localhost:5432/ImageDB";//连接数据库的字符串
+	private static final String URL = "jdbc:postgresql://192.168.2.103:5432/Test1";//连接数据库的字符串
 	private static final String USERNAME = "postgres";//数据库用户名
-	private static final String PASSWORD = "superhero";//数据库用户密码
+	private static final String PASSWORD = "968132";//数据库用户密码
 	
 	/**
 	 * 获得数据库连接

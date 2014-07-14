@@ -8,7 +8,7 @@ import java.util.List;
 import java.text.SimpleDateFormat;
 
 import com.lvg.database.GetConnection;
-import com.lvg.entity.User;
+import com.imagedb.struct.UserInfo;
 public class Pagination extends GetConnection {
     private final int PAGEROW = 10;//每页显示的行数 
 	private int countRow;//总行数
@@ -77,24 +77,12 @@ public class Pagination extends GetConnection {
 	}
 	
 	/**
-	* 日期转换成字符串
-	* @param date
-	* @return str
-	*/
-	public static String DateToStr(Date date) {
-	  
-	   SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-	   String str = format.format(date);
-	   return str;
-	} 
-
-	/**
 	 * 分页查询
 	 * @param page 当前页数
 	 * @return
 	 */
-	public List<User> userQuery(int page){
-		List<User> userList =new ArrayList<User>();  //存储用户的列表
+	public List<UserInfo> userQuery(int page){
+		List<UserInfo> userList =new ArrayList<UserInfo>();  //存储用户的列表
 		int count=(page-1)*this.PAGEROW;  //查询记录的开始计数
 		String sql = "SELECT top("+this.PAGEROW+") * FROM TBL_BOOK WHERE book_id NOT IN"
 				     + " (SELECT TOP("+count+") book_id FROM TBL_BOOK)";  //从剩计数点开始查询10条用户记录
@@ -105,14 +93,14 @@ public class Pagination extends GetConnection {
 			ResultSet rs = ps.executeQuery();
 			//执行预编译好的 SQL 指令，并把获得的查询结果集存储在 ResultSet 对象中
 			while(rs.next()){
-				User user=new User();
+				UserInfo user=new UserInfo();
 				user.setUserName(rs.getString("UerName"));
 				user.setRealName(rs.getString("RealName"));
 				user.setUserType(rs.getByte("Type"));
 				user.setTel(rs.getString("Tel"));
 				user.setEmail(rs.getString("Email"));
 				user.setPermission(rs.getByte("Permission"));
-				String strDate=Pagination.DateToStr(rs.getDate("Date"));//将从数据库中获取的日期从Date类型转换为String类型
+				Date strDate=rs.getDate("Date");//将从数据库中获取的日期从Date类型转换为String类型
 				user.setLastTime(strDate);
 			}
 		}catch (SQLException e) {
