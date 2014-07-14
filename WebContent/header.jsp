@@ -27,7 +27,9 @@
                <li class="dropdown" style="margin-left:10px; width:100px">
                 	<a href="#" class="dropdown-toggle" data-toggle="dropdown">用户名<b class="caret"></b></a>
                 	<ul class="dropdown-menu">
-                		<li class="nav-header" style="background: url('img/userPanel.jpg');width:300px;height:100px;">您好</li>
+                		<li class="nav-header" style="width:200px;height:100px;">
+ 							<h4>欢迎回来:<%=session.getAttribute("username")%></h4>
+ 						</li>
                 		<li class="nav-header"></li>
                 		<li class="pull-right"><button class="btn" onclick="window.location.href='userInfoClient.jsp'">用户信息</button>
                 		  <button class="btn" onclick="window.location.href='index.jsp'">安全退出</button>

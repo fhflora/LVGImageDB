@@ -18,12 +18,6 @@
 				<interceptor-ref name="LoginInterceptor"></interceptor-ref>
 			</interceptor-stack>
 		</interceptors>	 
-
-		<action name="HomeAction" class="com.lvg.action.HomeAction" method="ShowImageAction">
-			<result name="success" >home2.jsp</result>
-			<result name="input">index.jsp</result>
-			<!-- <interceptor-ref name="loginStack"></interceptor-ref> -->
-		</action>
 		
 		<action name="CheckLoginAction" class="com.lvg.action.UserAction" method="CheckLoginAction">
 			<result name="success" type="redirect">home.jsp</result>
