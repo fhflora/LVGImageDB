@@ -28,6 +28,7 @@ public class UserAction extends ActionSupport implements SessionAware{
 			this.addFieldError("userName", "用户名不能为空");
 			return INPUT;
 		}
+		//添加访问数据库语句  验证用户
 		if(user.getUserName().equals("admin")&&user.getPassword().equals("admin")){
 			session.put("user", user);
 			session.put("username", user.getUserName());

@@ -14,9 +14,11 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class HomeAction extends ActionSupport {
 
-	public List<List<ShowImage>> srcImgRowList;
-	public int index;
-	public int count;
+	private List<List<ShowImage>> srcImgRowList;
+	private int index;
+	private int count;
+	private String type;
+
 
 	public String ShowImageAction() {
 
@@ -129,6 +131,7 @@ public class HomeAction extends ActionSupport {
 		ServletContext context = ServletActionContext.getServletContext();
 		String srcSearch = context.getRealPath("/") + "img/images/";
 		// String srcSearch="C:/software/LVGImageDB/WebContent/img/images/";
+		//访问数据库语句 传递图片类型
 		String srcShow = "img/images/";
 
 		File directory = new File(srcSearch);
@@ -245,7 +248,13 @@ public class HomeAction extends ActionSupport {
 	public void setCount(int count) {
 		this.count = count;
 	}
+	public String getType() {
+		return type;
+	}
 
+	public void setType(String type) {
+		this.type = type;
+	}
 	public List<List<ShowImage>> getSrcImgRowList() {
 		return srcImgRowList;
 	}
