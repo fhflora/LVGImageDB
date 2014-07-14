@@ -1,6 +1,6 @@
 
 import com.lvg.database.UserDB;
-import com.lvg.entity.User;
+import com.imagedb.struct.UserInfo;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -49,7 +49,7 @@ public class Search extends HttpServlet {
 		String userState=request.getParameter("userState");
 		
 	    try {
-			List<User> userList=UserDB.searchUser(userName, userType,userRight,userState);//获得搜索到的用户结果集
+			List<UserInfo> userList=UserDB.searchUser(userName, userType,userRight,userState);//获得搜索到的用户结果集
 			RequestDispatcher rd = request.getRequestDispatcher("userList.jsp"); //重定向到UserList页面 
 		    request.setAttribute("userList",userList);//将用户列表存入request中，发送给UserLIst页面
 		    rd.forward(request,response);//开始跳转  

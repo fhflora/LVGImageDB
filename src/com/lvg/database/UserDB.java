@@ -5,7 +5,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
-import com.lvg.entity.User;
+import com.imagedb.struct.UserInfo;
 /**
  * 按条件查询用户
  * @param userName 用户名 userType 用户类型 UerRight 用户权限 userState用户登录状态
@@ -14,16 +14,16 @@ import com.lvg.entity.User;
 
 public class UserDB  {
 	@SuppressWarnings("null")
-	public static List<User> searchUser(String userName,String userType,String userRight[],String userState)
+	public static List<UserInfo> searchUser(String userName,String userType,String userRight[],String userState)
 			throws SQLException{
-		List<User> userList=null;//从数据库中查询的User放入UsrList中
+		List<UserInfo> userList=null;//从数据库中查询的User放入UsrList中
 		String sql="";//查询的上去了语句
 		Connection conn=GetConnection.getConn();
 		Statement stat=conn.createStatement();
 		ResultSet rs=stat.executeQuery(sql);
 		if(rs!=null){
 			whlie(rs.next());{
-				User user=new User();
+				UserInfo user=new UserInfo();
 				user.setUserName(rs.getString("userName"));  
 		        user.setRealName(rs.getString("realName"));  
 		        user.setEmail(rs.getString("email"));  

@@ -1,6 +1,6 @@
 
 import com.lvg.database.UserDB;
-import com.lvg.entity.User;
+import com.imagedb.struct.UserInfo;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

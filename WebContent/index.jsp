@@ -70,6 +70,16 @@
 <script type="text/javascript">
 	function loadimage() {
 		document.getElementById("randImage").src = "certPicture.jsp?" + Math.random();
+		$('input[type="radio"]:checked').val();
+	}
+
+	function login(){
+		if($('input[type="radio"]:checked').val()==1){
+			document.forms[0].action="userLogin.action";
+		}else{
+			document.forms[0].action="managerLogin.action";
+		}
+		document.forms[0].submit();
 	}
 </script>
 </head>
@@ -83,7 +93,7 @@
 					<p>...... PS:对系统的介绍</p>
 				</span>
 			   <span class="span4">
-					<form action="CheckLoginAction.action" method="post" class="form-signin">
+					<form  method="post" class="form-signin">
 						<h2 class="form-sigin-heading">LVG</h2>
 						<!-- 错误信息显示 -->
 						<div>
@@ -105,10 +115,13 @@
 								class="input-block-level" placeholder="密码" required> <br>
 						</div>
 						<div class="control-group">
-							<label class="radio inline"> <input type="radio"
-								name="user.userType" value="manager"> 管理员
-							</label> <label class="radio inline"> <input type="radio"
-								name="type" value="user" checked="checked"> 用户
+							<label class="radio inline"> 
+							<input type="radio"
+								name="user.userType" value="0" checked> 管理员
+							</label> 
+							<label class="radio inline">
+							<input type="radio"
+								name="user.userType" value="1"  > 用户
 							</label>
 						</div>
 						<!-- 错误验证信息显示 -->
@@ -122,9 +135,9 @@
 								href="javascript:loadimage();"><font class=pt95>看不清，请点我</font></a>
 						</div>
 						<div class="control-btn">
-						<button class="btn btn-large" type="submit" name="登陆" style="text-algin">登  陆</button>
+						<button class="btn btn-large" type="submit" name="登陆" style="text-algin" onclick="login()">登  陆</button>
 						</div>
-			</form>
+			 </form>
 			 </span>
 			</div>
 		</div>

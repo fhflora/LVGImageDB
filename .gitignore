@@ -36,3 +36,7 @@ Icon
 .Trashes
 
 *.class
+*.class
+*.class
+build/classes/com/lvg/database/GetConnection.class
+build/classes/com/lvg/database/GetConnection.class
