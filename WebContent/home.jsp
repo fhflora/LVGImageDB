@@ -23,6 +23,7 @@
 <script type="text/javascript">
 var index=0;
 var count=25;
+var type="";
 $(document).ready(function(){
 		var lvg_login=<%=session.getAttribute("lvg_login")%>;
 		if(lvg_login==null || lvg_login=="" || lvg_login==false)
@@ -32,22 +33,23 @@ $(document).ready(function(){
 		$(window).scroll(function() {
             
             if ($(document).scrollTop() >= $(document).height() - $(window).height()) {
-            	LoadImage();
+            	LoadImage(type);
                
             }
         });  
 	
 });
 
-function getAerialImg(){
+function getImage(type){
 	$("#imglist").html("");
+	this.type=type;
+	index=0;
+	LoadImage(type);
 }
-function LoadAerialImage(){
+function LoadImage(type){
 	
-}
-function LoadImage(){
 	var url="HomeActionAjax.action";
-	var data = {"index":index,"count":count};
+	var data = {"index":index,"count":count,"type":type};
 	$.ajax({
 		url : url,
 		type : 'POST',
@@ -66,7 +68,7 @@ function LoadImage(){
 				for(var j=0 ; j<srcImgRow.length;j++){
 					var ShowImage = srcImgRow[j];
 					var spanStr="<span class='span{width}''>"+
-                				"<a href='#'><img src='{src}' class='imgInSpan{width}'></a>"+
+                				"<a href='#'>"+json.type+"<img src='{src}' class='imgInSpan{width}'></a>"+
                     			"</span>"
                     spanStr = replaceAll(spanStr,"{width}",ShowImage.srcImageWidth);
                     spanStr = replaceAll(spanStr,"{src}",ShowImage.srcImagePath);
@@ -111,26 +113,22 @@ function replaceAll(obj,str1,str2){
 					<li>
 						<h2>最新图片</h2>
 					</li>
-					<li style="margin-left: 20px; margin-top: 20px"><a onclick="">航片图</a></li>
+					<li style="margin-left: 20px; margin-top: 20px"><a onclick="getImage('AerialImage');">航片图</a></li>
 					<li>
 						<div
 							style="height: 19px; width: 1px; border-left: 2px #BDB0B0 solid; margin: 20px 10px 0px 10px;"></div>
 					</li>
-					<li style="margin-top: 20px"><a>全景图</a></li>
+					<li style="margin-top: 20px"><a onclick="getImage('PanoImage');">全景图</a></li>
 					<li>
 						<div
 							style="height: 19px; width: 1px; border-left: 2px #BDB0B0 solid; margin: 20px 10px 0px 10px;"></div>
 					</li>
-					<li style="margin-top: 20px"><a>超大图</a></li>
+					<li style="margin-top: 20px"><a onclick="getImage('BigImage');">超大图</a></li>
 				</ul>
 			</div>
 		</div>
  		<div> 
- 		<ul class="list-inline">
- 			<li style="margin-left: 20px; margin-top: 20px"><a>欢迎回来:<%=session.getAttribute("username")%></a>
- 		</li>
- 		</ul>
- 		</div> 
+ 	</div> 
 		<!-- show images:现在只是本地图片  -->
 	 	<div class="container" id="imglist">
 
