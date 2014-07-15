@@ -35,7 +35,22 @@
 }
 </style>
 <body>
-	<header> <jsp:include page="header.jsp" /> </header>
+	<header>
+	<div class="navbar navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container">
+				<div class="row">
+					<div class="span2">
+						<a href="createImage.jsp" class="brand brand-bootbus">LVY</a>
+					</div>
+					<div class="span3 offset7">
+						<a href="createImage.jsp" class="brand" id="title">影像上传</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	</header>
 	<div >
 	<ul class="list-inline">
  			<li style="margin-left: 43%; margin-top: 100px"><h2>把影像拖放到这里</h2></li>

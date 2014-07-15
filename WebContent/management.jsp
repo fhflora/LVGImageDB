@@ -33,6 +33,8 @@
 <script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript" src="js/jquery.dataTables.js"></script>
 <script type="text/javascript" src="js/DT-bootstrap.js"></script>
+<script type="text/javascript" src="js/dataTable.js"></script>
+
 
 <style>
 .btn {
@@ -47,7 +49,7 @@
 		<div class="navbar-inner">
 			<div class="container">
 				<a href="management.jsp" class="brand brand-bootbus">LVY</a> <a
-					href="management.jsp" class="brand" id="title">影像数据库系统管理</a>
+					href="management.jsp" class="brand" id="title" >影像数据库系统管理</a>
 			</div>
 		</div>
 	</div>
@@ -79,18 +81,19 @@
 						</thead>
 						<tbody>
 							<tr>
-								<td>01</td>
-								<td>flora</td>
-								<td>fuhui</td>
-								<td>01</td>
-								<td>150777777</td>
-								<td>6666@qq.com</td>
+								<td>1</td>
+								<td>flo</td>
+								<td>fuh</td>
+								<td>0</td>
+								<td>1507</td>
+								<td>6666@qq.</td>
 								<td style="text-align: center;">1</td>
 								<td>login</td>
-								<td>2014/7/13</td>
+								<td>2014/7/15</td>
 								<td style="text-align: center;"><a href='#' onclick=''
 									>删除</a>&nbsp;<a href='#' onclick=''>修改</a></td>
 							</tr>
+							
 						</tbody>
 					</table>
 					
