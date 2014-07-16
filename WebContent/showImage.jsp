@@ -24,6 +24,9 @@
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/boot-business.js"></script>
+    <style type="text/css">
+
+</style>
 </head>
 <body>
 <!-- 页面顶端导航和搜索框 -->
@@ -36,13 +39,13 @@
 
 <div class="container">
       <div class="row" style="margin-top: 50px;">
-	    <span class="span2">
+	    <span class="span3">
 	    	<%-- <jsp:include page="showImageInfo.jsp"/> --%>
-	    	<jsp:include page="hotPointInfo.jsp"/>
+	    	<jsp:include page="imageManagement.jsp"/>
 	    </span>
 	     <div style="height:600px;width: 1px;border-left: 2px #BDB0B0 solid;float:left;"></div>
-	    <span class="span9">
-	    <img src="img/images/01.jpg" class="img-polaroid">
+	    <span class="span8">
+	    <img src="img/images/1.jpg" class="img-polaroid">
 	    </span>
 	   </div>
 </div>

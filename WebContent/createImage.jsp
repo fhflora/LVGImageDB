@@ -10,7 +10,7 @@
 <title>影像上传</title>
 
 <!-- Bootstrap -->
-<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
 <!-- Bootstrap responsive -->
 <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
 <!-- Font awesome - iconic font with IE7 support -->
@@ -20,19 +20,18 @@
 <link href="css/boot-business.css" rel="stylesheet">
 <!-- main theme -->
 <link href="css/main.css" rel="stylesheet">
+<!--datetimepicker -->
+<link href="css/bootstrap-datetimepicker.min.css" rel="stylesheet"
+	media="screen">
 
-
-<link
-	href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css"
-	rel="stylesheet">
-<link rel="stylesheet" type="text/css" media="screen"
-	href="http://tarruda.github.com/bootstrap-datetimepicker/assets/css/bootstrap-datetimepicker.min.css">
 
 
 <script type="text/javascript" src="js/jquery.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/boot-business.js"></script>
-
+<script type="text/javascript" src="js/bootstrap-datetimepicker.js"></script>
+<script type="text/javascript"
+	src="js/bootstrap-datetimepicker.zh-CN.js"></script>
 
 
 
@@ -110,13 +109,31 @@
 
 					</form>
 
-					<div id="datetimepicker" class="input-append date">
-						<input type="text" class="form-control" id="name"
-							placeholder="采集时间"> 
-							<span class="add-on"> 
-							<i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
-							</span>
+					<div class="control-group">
+
+						<div class="controls input-append date form_date"
+							data-date="yyyy/mm/dd" data-date-format="yyyy/mm/dd"
+							data-link-field="dtp_input2" data-link-format="yyyy/mm/dd">
+							<input size="16" type="text" value="" readonly placeholder="采集时间"
+								style="width: 65%;"> <span class="add-on"><i
+								class="icon-remove"></i></span> <span class="add-on"><i
+								class="icon-th"></i></span>
+						</div>
+						<input type="hidden" id="dtp_input2" value="" /><br />
 					</div>
+					<script type="text/javascript">
+						$('.form_date').datetimepicker({
+							language : 'zh-CN',
+							weekStart : 1,
+							todayBtn : 1,
+							autoclose : 1,
+							todayHighlight : 1,
+							startView : 2,
+							minView : 2,
+							forceParse : 0
+						});
+					</script>
+
 					<form role="form" action="">
 						<div class="form-group">
 							<label for="name">描述信息</label>
@@ -133,27 +150,6 @@
 			</span>
 		</div>
 	</div>
-	<script type="text/javascript"
-		src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js">
-		
-	</script>
-	<script type="text/javascript"
-		src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js">
-		
-	</script>
-	<script type="text/javascript"
-		src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.min.js">
-		
-	</script>
-	<script type="text/javascript" src="js/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
-	<script type="text/javascript">
-		$('#datetimepicker').datetimepicker({
-			format : 'yyyy/dd/MM',
-			language :'zh-CN',
-			pickDate : true,
-			pickTime : false,
-			inputMask : false
-		});
-	</script>
+
 </body>
 </html>
