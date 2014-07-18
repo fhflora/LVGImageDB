@@ -41,7 +41,7 @@
       <div class="row" style="margin-top: 50px;">
 	    <span class="span3">
 	    	<%-- <jsp:include page="showImageInfo.jsp"/> --%>
-	    	<jsp:include page="imageManagement.jsp"/>
+	    	<jsp:include page="hotPointInfo.jsp"/>
 	    </span>
 	     <div style="height:600px;width: 1px;border-left: 2px #BDB0B0 solid;float:left;"></div>
 	    <span class="span8">
