@@ -1,18 +1,18 @@
 package com.imagedb.struct;
 
-/** Êý¾Ý¿âÁ¬½ÓÐÅÏ¢ */
+/** ï¿½ï¿½Ý¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ */
 public class ConnInfo {
-    public int nPort;        		// ¶Ë¿ÚºÅ
-	public String strHost;        	// Ö÷»úIPµØÖ·
-    public String strUser;        	// ÓÃ»§Ãû
-    public String strDbName;     	// Êý¾Ý¿âÃû³Æ
-    public String strPassword;    	// ÃÜÂë
+    public int nPort;        		// ï¿½Ë¿Úºï¿½
+	public String strHost;        	// ï¿½ï¿½ï¿½ï¿½IPï¿½ï¿½Ö·
+    public String strUser;        	// ï¿½Ã»ï¿½ï¿½ï¿½
+    public String strDbName;     	// ï¿½ï¿½Ý¿ï¿½ï¿½ï¿½ï¿½
+    public String strPassword;    	// ï¿½ï¿½ï¿½ï¿½
   
     public ConnInfo() {
     	nPort = 5432;
     	strUser = "postgres";
-    	strHost = "192.168.2.103";
+    	strHost = "localhost";
     	strDbName = "postgres";
-    	strPassword = null;
+    	strPassword = "968132";
     }
 }

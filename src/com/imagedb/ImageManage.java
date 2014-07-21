@@ -659,7 +659,7 @@ public abstract class ImageManage extends ImageDatabase {
 			int nID = 0;				// 表的ID
 			String strName = null;		// 表的名称
 
-			StringBuffer strQuery = new StringBuffer("select * from \"00000\" ");
+			StringBuffer strQuery = new StringBuffer("select \"ID\", \"Name\" from \"00000\" ");
 			strQuery.append("where \"ID\" > 10000 and \"ID\" < 16777216");
 
 			Statement command = hConnection.createStatement();
@@ -677,6 +677,7 @@ public abstract class ImageManage extends ImageDatabase {
 			strMessage = new StringBuffer("Succeed to get ID of top tables.");
 			return true;
 		} catch (Exception ex) {
+			nTopTabID = null;
 			strMessage = new StringBuffer(ex.getMessage());
 			return false;
 		}
@@ -687,22 +688,15 @@ public abstract class ImageManage extends ImageDatabase {
 	 * @param nChildTabID 存放图像子表的ID与名称
 	 * @return　true：获取成功<br>false：获取失败 */
 	public boolean getChildTablesID(int nTopTabID, Hashtable<Integer, String> nChildTabID) {
-		boolean isAutoCommit = true;
 		try {
 			int nID = 0;				// 表的ID
 			String strName = null;		// 表的名称
-			
-			isAutoCommit = hConnection.getAutoCommit();				
-			if (isAutoCommit) {
-				hConnection.setAutoCommit(false);
-			}
 
-			StringBuffer strQuery = new StringBuffer("select * from \"");
+			StringBuffer strQuery = new StringBuffer("select \"ID\", \"TableName\" from \"");
 			strQuery.append(nTopTabID);
 			strQuery.append("\"");
 
 			Statement command = hConnection.createStatement();
-			command.setFetchSize(1000);
 			ResultSet drResult = command.executeQuery(strQuery.toString());
 
 			while (drResult.next()) {
@@ -712,23 +706,12 @@ public abstract class ImageManage extends ImageDatabase {
 			}
 
 			drResult.close();
-			command.setFetchSize(0);
 			command.close();
-
-			if (isAutoCommit) {
-				hConnection.setAutoCommit(isAutoCommit);
-			}
 			
 			strMessage = new StringBuffer("Succeed to get ID of child tables.");
 			return true;
 		} catch (Exception ex) {
-			try {
-				nChildTabID = null;
-				hConnection.setAutoCommit(isAutoCommit);
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-			
+			nChildTabID = null;		
 			strMessage = new StringBuffer(ex.getMessage());
 			return false;
 		}
@@ -739,22 +722,15 @@ public abstract class ImageManage extends ImageDatabase {
 	 * @param nImageID 存放图像的ID与名称
 	 * @return true：获取成功<br>false：获取失败 */
 	public boolean getImagesID(int nTableID, Hashtable<Long, String> nImageID) {
-		boolean isAutoCommit = true;
 		try {
 			long nID = 0; // 表的ID
 			String strName = null; // 表的名称
 			
-			isAutoCommit = hConnection.getAutoCommit();				
-			if (isAutoCommit) {
-				hConnection.setAutoCommit(false);
-			}
-
-			StringBuffer strQuery = new StringBuffer("select * from \"");
+			StringBuffer strQuery = new StringBuffer("select \"ID\", \"ImageName\" from \"");
 			strQuery.append(nTableID);
 			strQuery.append("\"");
 
 			Statement command = hConnection.createStatement();
-			command.setFetchSize(1);
 			ResultSet drResult = command.executeQuery(strQuery.toString());
 
 			while (drResult.next()) {
@@ -764,23 +740,12 @@ public abstract class ImageManage extends ImageDatabase {
 			}
 
 			drResult.close();
-			command.setFetchSize(0);
 			command.close();
 
-			if (isAutoCommit) {
-				hConnection.setAutoCommit(isAutoCommit);
-			}
-			
 			strMessage = new StringBuffer("Succeed to get ID of images.");
 			return true;
 		} catch (Exception ex) {
-			try {
-				nImageID = null;
-				hConnection.setAutoCommit(isAutoCommit);
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-			
+			nImageID = null;		
 			strMessage = new StringBuffer(ex.getMessage());
 			return false;
 		}

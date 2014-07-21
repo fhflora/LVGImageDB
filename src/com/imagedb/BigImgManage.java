@@ -1,14 +1,19 @@
 package com.imagedb;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+
+import javax.imageio.ImageIO;
 
 import com.imagedb.struct.BmpHead;
 import com.imagedb.struct.ImageInfo;
@@ -87,6 +92,49 @@ public class BigImgManage extends ImageManage {
 			strMessage = new StringBuffer(ex.getMessage());
 			return null;
 		}
+	}
+	
+	/** 获取一个超大图像的第nLayer层图像 
+	 * @param nImageID 数据库块所在图像的ID
+	 * @param nLayer 金字塔层数
+	 * @return 成功：返回图像<br>失败：返回 null 值 
+	 * @throws IOException */
+	public BufferedImage getImage(long nImageID, int nLayer) throws IOException {
+		byte[] tbmHead = getBlockData(nImageID, BigImgManage.TBM_HEAD_ID, 0);
+		TnkTbmFileHead tbmFileHead = BigImgManage.parseTbmFileHead(tbmHead, true);
+		
+		double nRatio = Math.pow(2, tbmFileHead.nLayerCount - nLayer -1);		
+		int nLayerHeight  = (int) (tbmFileHead.nHeight / nRatio);
+		int nLayerWidth	= (int) (tbmFileHead.nWidth / nRatio);	
+		
+		int nRowCount = getRowCount(nLayer, tbmFileHead);
+		int nColCount = getColCount(nLayer, tbmFileHead);
+		
+		int nX;
+		int nY;
+		int nCode;		
+		byte[] data;
+		BufferedImage inputImage;
+		ByteArrayInputStream inputStream;	
+		BufferedImage outputImage = new BufferedImage(nLayerWidth, nLayerHeight, BufferedImage.TYPE_3BYTE_BGR);
+	
+		for (int nRow = 0; nRow < nRowCount; nRow++) {
+			for (int nCol = 0; nCol < nColCount; nCol++) {
+				nX = nCol * tbmFileHead.nTileSize;
+				nY = nLayerHeight - nRow * tbmFileHead.nTileSize;
+				
+				nCode = ImageManage.getQueryCode(nLayer, nRow, nCol);
+				data = getBlockData(nImageID, nCode, 1);
+				
+				inputStream = new ByteArrayInputStream(data);
+				inputImage = ImageIO.read(inputStream);
+				
+				outputImage.getGraphics().drawImage(inputImage, nX, nY - inputImage.getHeight(), inputImage.getWidth(), 
+													inputImage.getHeight(), null);				
+			}
+		}
+		
+		return outputImage;
 	}
 
 	@Override
@@ -369,10 +417,13 @@ public class BigImgManage extends ImageManage {
 			command.executeUpdate(strQuery.toString());
 			ThumbManage thumbManage = new ThumbManage(hConnection);
 
+			 
+			
+			
 			// 创建图像数据块表，修改图像所在子表的序列号
 			if (!createBlockTab(nImageID, imageInfoTemp.strFilePath) 
-				|| !setSerialNum(imageInfoTemp.nTableID) || 
-				!thumbManage.setThumbData(nImageID, thumbManage.createTbmThumb(nImageID))) {
+				|| !setSerialNum(imageInfoTemp.nTableID) 
+				|| !thumbManage.setThumbData(nImageID, thumbManage.createTbmThumb(nImageID))) {
 				hConnection.rollback();
 				if (isAutoCommit) {
 					hConnection.setAutoCommit(isAutoCommit);
@@ -469,11 +520,26 @@ public class BigImgManage extends ImageManage {
             int nBlockSize = (int) (tbmFileHeader.nNumColors / 8 * Math.pow(tbmFileHeader.nTileSize, 2) 
             				 	    + BLOCK_HEAD_SIZE + BMP_HEAD_SIZE);
             dataBuffer = new byte[nBlockSize];
+//            byte[] dataBuffer1 = new byte[nBlockSize - BLOCK_HEAD_SIZE];
             
             for (int i = 0; i < tnkBlockAssit.nVlidBlkNum; i++) {
             	imageDataIn.readFully(dataBuffer, 0, nBlockSize);                
             	tnkBlockHead = parseBlockHead(dataBuffer, true);
-
+            	
+//            	System.arraycopy(dataBuffer, 92, dataBuffer1, 0, dataBuffer1.length);
+//            	BufferedImage inputImage = ImageIO.read(new ByteArrayInputStream(dataBuffer1));
+            	
+//            	int nWidth = inputImage.getWidth();
+ //           	int nHeight = inputImage.getHeight();
+            	
+            	// 对源图像进行重采样
+//    			BufferedImage dstBufferedImage = new BufferedImage(nWidth, nHeight, BufferedImage.TYPE_3BYTE_BGR);
+ //   			dstBufferedImage.getGraphics().drawImage(inputImage, 0, 0, nWidth, nHeight, null);
+    			
+    			// 输出缩略图
+//    			ByteArrayOutputStream outputImage = new ByteArrayOutputStream();
+//    			ImageIO.write(dstBufferedImage, "jpg", outputImage);
+            	
                 command.setInt(1, tnkBlockHead.nImgBlockID);
                 command.setBytes(2, dataBuffer);
                 command.executeUpdate();               

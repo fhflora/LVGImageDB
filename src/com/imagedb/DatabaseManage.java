@@ -6,7 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.LinkedList;
+
 import org.postgresql.Driver;
+
 import com.imagedb.struct.ConnInfo;
 
 
@@ -213,7 +215,7 @@ public class DatabaseManage extends ImageDatabase {
 	 * @return true：数据库名称获取成功<br>false：数据库名称获取失败 */
 	public boolean listDB(LinkedList<String> listDbName) {
 		try {
-			StringBuffer strQuery = new StringBuffer("select * from pg_database");
+			StringBuffer strQuery = new StringBuffer("select \"datname\" from pg_database");
 			Statement command = hConnection.createStatement();
 			ResultSet drResult = command.executeQuery(strQuery.toString());
 
@@ -283,7 +285,7 @@ public class DatabaseManage extends ImageDatabase {
      * @return true：数据库用户名称获取成功<br>false：数据库用户名称获取失败 */
 	public boolean listUser(LinkedList<String> listUserName) {
 		try {
-			StringBuffer strQuery = new StringBuffer("select * from pg_authid");
+			StringBuffer strQuery = new StringBuffer("select \"rolname\" from pg_authid");
 			Statement command = hConnection.createStatement();
 			ResultSet drResult = command.executeQuery(strQuery.toString());
 

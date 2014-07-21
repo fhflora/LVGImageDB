@@ -1,6 +1,5 @@
 package com.imagedb;
 
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,7 +14,7 @@ import com.imagedb.struct.ImageInfo;
  * @version		1.00 11 July 2014 */
 public class CollectManage extends ImageDatabase {
 	
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) {
 
     }
 	
@@ -76,7 +75,7 @@ public class CollectManage extends ImageDatabase {
         }
 	}
 	
-	/** 判断图像在收藏子表是否存在
+	/** 判断图像在收藏子表中是否存在
 	 * @param nUserID 用户的ID
 	 * @param nTableID 收藏子表的ID
 	 * @param nImageID 图像的ID
@@ -639,7 +638,7 @@ public class CollectManage extends ImageDatabase {
 			int nID = 0;				// 表的ID
 			String strName = null;		// 表的名称
 
-			StringBuffer strQuery = new StringBuffer("select * from \"");
+			StringBuffer strQuery = new StringBuffer("select \"ID\", \"TableName\" from \"");
 			strQuery.append(nUserID);
 			strQuery.append("_Top\"");
 
@@ -674,7 +673,7 @@ public class CollectManage extends ImageDatabase {
 			long nID = 0; // 表的ID
 			String strName = null; // 表的名称
 			
-			StringBuffer strQuery = new StringBuffer("select * from \"");
+			StringBuffer strQuery = new StringBuffer("select \"ID\", \"ImageName\" from \"");
 			strQuery.append(nUserID);
 			strQuery.append("_Top_");
 			strQuery.append(nTableID);

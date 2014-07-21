@@ -1,53 +1,46 @@
 package com.lvg.database;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class GetConnection {
 	
-	protected Connection conn = null;//连接字符串
-	protected PreparedStatement ps = null;//预编译并存储 SQL 指令
-	protected ResultSet rs = null;//查询结果集
+	protected static Connection conn = null;//连接字符串
 	
 	private static final String DRIVER = "org.postgresql.Driver";//加载数据库驱动的字符串
-	private static final String URL = "jdbc:postgresql://192.168.2.103:5432/Test1";//连接数据库的字符串
+	private static String URL;//连接数据库的字符串
 	private static final String USERNAME = "postgres";//数据库用户名
 	private static final String PASSWORD = "968132";//数据库用户密码
 	
 	/**
-	 * 获得数据库连接
+	 * 
+	 * @param databaseName 连接的数据库名称
 	 * @return
 	 */
-	public static Connection getConn() {
+	public static Connection getConn(String databaseName) {
 		Connection conn = null;
+		URL="jdbc:postgresql://localhost:5432/"+databaseName;
 		try {
 			Class.forName(DRIVER);//加载数据库驱动
 			conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);//连接数据库
-			System.out.print("数据库连接成功");
+			System.out.println("数据库连接成功");
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally {
+
 		}
+		
 		return conn;
 	}
 	
-	/*
+	/**
 	 * 释放数据库资源
 	 */
-	public void closeAll(){
+	public static void closeAll(){
 		try {
-			if(rs != null){
-				rs.close();
-			}
-			if(ps != null){
-				ps.close();
-			}
 			if(conn != null){
 				conn.close();
 			}
@@ -55,8 +48,7 @@ public class GetConnection {
 			e.printStackTrace();
 		}finally{
 			conn = null;
-			ps = null;
-			rs = null;
+			System.out.println("释放资源");
 		}
 	}
 

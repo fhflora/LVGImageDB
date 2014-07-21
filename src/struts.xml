@@ -10,35 +10,69 @@
 	 
 
 	<package name="action" extends="struts-default">	
-	
+		<result-types>
+			<result-type name="ImageAction" class="com.lvg.action.ImageResult"/>
+		</result-types>	
 		 <interceptors>
 		    <interceptor name="LoginInterceptor" class="com.lvg.interceptor.LoginActionInterceptor"></interceptor>
 			<interceptor-stack name="loginStack">		
 				<interceptor-ref name="defaultStack"></interceptor-ref>		
 				<interceptor-ref name="LoginInterceptor"></interceptor-ref>
 			</interceptor-stack>
-		</interceptors>	 
-		
+		</interceptors>	 		
+		<action name="insertUserInfo" class="com.lvg.action.UserAction" method="insertUserInfo">
+			<result name="success" type="chain">userInfoList</result>
+		</action>			
+		<action name="userInfoList" class="com.lvg.action.UserAction" method="userInfoList">
+			<result name="success">new_management.jsp</result>
+		</action>		
+		<action name="deleteUserInfo" class="com.lvg.action.UserAction" method="deleteUserInfo">
+			<result name="success" type="redirect">userInfoList</result>
+		</action>	
+		<action name="modifyUserInfo" class="com.lvg.action.UserAction" method="modifyUserInfo">
+			<result name="success" type="redirect">userInfoList</result>
+		</action>		
 		<action name="userLogin" class="com.lvg.action.UserAction" method="userLogin">
 			<result name="success" type="redirect">home.jsp</result>
 			<result name="input">index.jsp</result>
-		</action>
-		
+		</action>		
 		<action name="managerLogin" class="com.lvg.action.UserAction" method="managerLogin">
-			<result name="success" type="redirect">management.jsp</result>
+			<result name="success" type="redirect">new_management.jsp</result>
 			<result name="input">index.jsp</result>
-		</action>
-		
+		</action>		
 		<action name="LogoutAction" class="com.lvg.action.UserAction" method="logoutAction">
 			<result name="success" type="redirect">index.jsp</result>
 			<result name="input">home.jsp</result>
+		</action>		
+		<action name="ImageAction" class="com.lvg.action.ImageListAction" method="showImage">
+			<result name="image" type="ImageAction"/>
 		</action>
-		
 	</package>	
 	
-	<package name="ajax" extends="json-default">
-		<action name="HomeActionAjax" class="com.lvg.action.HomeAction" method="ShowImageActionAjax">
+	<package name="ajax" extends="json-default">	
+		<action name="ImageListAction" class="com.lvg.action.ImageListAction" method="imageListAjax">
+			<result type="json"><param name="root">srcImgRowList</param></result>
+		</action>	
+		<action name="DatabaseListAjax" class="com.lvg.action.DatabaseListAction" method="showDatabaseListAjax">
+			<result type="json"></result>
+		</action>		
+		<action name="deleteUserInfoAjax" class="com.lvg.action.UserAction" method="deleteUsersInfo">
+			<result type="json"></result>
+		</action>		
+		<action name="modifyUserInfoAjax" class="com.lvg.action.UserAction" method="modifyUserInfo">
+			<result type="json"></result>
+		</action>		
+		<action name="UserListPagination" class="com.lvg.action.PaginationAction" method="UserListPagination">
 			<result type="json"></result>
 		</action>
+		<action name="insertUserInfoAjax" class="com.lvg.action.UserAction" method="insertUserInfo">
+				<result type="json"></result>
+		</action>
+	</package>
+	
+		<!-- 用户 信息操作配置-->
+	<package name="userInfo" extends="json-default">
+	
+		
 	</package>
 </struts>
