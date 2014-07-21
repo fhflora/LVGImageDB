@@ -103,7 +103,7 @@ function LoadImage(database,type){
 				for(var j=0 ; j<srcImgRow.length;j++){
 					var ShowImage = srcImgRow[j];
 					var spanStr="<span class='span{width}''>"+
-                				"<a href='#'><img src='{src}' class='imgInSpan{width}'></a>"+
+                				"<a href='#'><img src='{src}' class='imgInSpan{width} img-rounded img-polaroid'></a>"+
                     			"</span>";
                     spanStr = replaceAll(spanStr,"{width}",ShowImage.srcImageWidth);
                     spanStr = replaceAll(spanStr,"{src}",ShowImage.srcImagePath);

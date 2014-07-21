@@ -20,6 +20,7 @@ public class ImageListAction extends ActionSupport {
 	private String tableName;
 	private byte[] bytes = null;
 	private static  Hashtable<Integer, byte[]> imageBytesTable = new Hashtable<Integer, byte[]>();
+	private static long[] imgIDList;
 	private List<List<ShowImage>> srcImgRowList;
 	private String contentType = "image/jpg";
 	private int srcImageID;
@@ -29,7 +30,6 @@ public class ImageListAction extends ActionSupport {
 		Enumeration enumImgList;
 		Hashtable<Long, String> imgList = null;
 		ImageManage imageManage;
-		long[] imgID = null;
 		srcImgRowList = new ArrayList<List<ShowImage>>();
 
 		if (index == 0) {
@@ -48,17 +48,17 @@ public class ImageListAction extends ActionSupport {
 						(Integer) enumChildTables.nextElement(), imgList);
 			}
 			enumImgList = imgList.keys();
-			imgID = new long[imgList.size()];
+			imgIDList = new long[imgList.size()];
 			for (int i = 0; i < imgList.size(); i++) {
-				imgID[i] = (Long) enumImgList.nextElement();
+				imgIDList[i] = (Long) enumImgList.nextElement();
 			}
 			GetConnection.closeAll();
 		}
 
 		List<Integer> srcImgIndexList = new ArrayList<Integer>();
 		int endIndex = index + count;
-		if (endIndex > imgID.length)
-			endIndex = imgID.length;
+		if (endIndex > imgIDList.length)
+			endIndex = imgIDList.length;
 
 		for (int i = index; i < endIndex; i++) {
 			srcImgIndexList.add(i);
@@ -72,7 +72,7 @@ public class ImageListAction extends ActionSupport {
 
 		for (int i = 0; i < srcImgIndexList.size(); i++) {
 			double width = Math
-					.rint(this.getImageBytes(imgID[srcImgIndexList.get(i)],
+					.rint(this.getImageBytes(imgIDList[srcImgIndexList.get(i)],
 							srcImgIndexList.get(i)) / 1170.0 * 12);
 			if (width > 12)
 				width = 12;
