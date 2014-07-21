@@ -21,4 +21,69 @@ public class HotPntInfo {
 		strName = null;
 		strRemark = null;
 	}
+
+	public int getnID() {
+		return nID;
+	}
+
+	public void setnID(int nID) {
+		this.nID = nID;
+	}
+
+	public int getnType() {
+		return nType;
+	}
+
+	public void setnType(int nType) {
+		this.nType = nType;
+	}
+
+	public int getnLayerNum() {
+		return nLayerNum;
+	}
+
+	public void setnLayerNum(int nLayerNum) {
+		this.nLayerNum = nLayerNum;
+	}
+
+	public long getnImageID() {
+		return nImageID;
+	}
+
+	public void setnImageID(long nImageID) {
+		this.nImageID = nImageID;
+	}
+
+	public double getdPosX() {
+		return dPosX;
+	}
+
+	public void setdPosX(double dPosX) {
+		this.dPosX = dPosX;
+	}
+
+	public double getdPosY() {
+		return dPosY;
+	}
+
+	public void setdPosY(double dPosY) {
+		this.dPosY = dPosY;
+	}
+
+	public String getStrName() {
+		return strName;
+	}
+
+	public void setStrName(String strName) {
+		this.strName = strName;
+	}
+
+	public String getStrRemark() {
+		return strRemark;
+	}
+
+	public void setStrRemark(String strRemark) {
+		this.strRemark = strRemark;
+	}
+	
 }

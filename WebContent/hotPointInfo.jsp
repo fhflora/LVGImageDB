@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<head>
+<jsp:directive.page import="com.imagedb.struct.HotPntInfo"/>
+<%@ page import="java.io.*" %>
+<%@ page import="java.util.*" %>	
+<head>
 <style>
 #title {
 	width: 60px;
@@ -18,11 +21,15 @@ input{
 }
 #offset{
 margin-left:35%;}
-
+.hotPnt3{
+width:10px;
+}
 </style>
 
 </head>
-
+<%
+HotPntInfo hotPnt=new HotPntInfo();
+%>
 <div>
 	<div>
 		<h2>标注信息</h2>
@@ -32,31 +39,31 @@ margin-left:35%;}
 
 		<tr>
 			<td id="title">标注编号</td>
-			<td width="150" ><label>ID123</label>
-			</td>
+			<td><%=hotPnt.getnImageID()%></td>
 		</tr>
 		<tr>
 			<td id="title">标注名称</td>
-			<td width="150" id="tdEdit1"><label >图片标注1</label>
+			<td><input type="text" id="hotpnt1"  value="<%=hotPnt.getStrName()%>" disabled />
 			</td>
 			<td>
-				<button class="btn btn-small" value="编辑" id="submit" onclick="clickSubmit('#tdEdit1')" type="button">编辑</button>
+				<button class="btn btn-small" value="编辑" onclick="setvalue('#hotpnt1')"  type="button">编辑 </button>  
 			</td>
 		</tr>
 		<tr>
 			<td id="title">标注类型</td>
-			<td width="150" id="tdEdit2"><label >图片标注</label>
+			<td><input type="text" id="hotpnt2"  value="<%=hotPnt.getnType()%>" disabled />
 			</td>
 			<td>
-				<button class="btn btn-small" value="编辑" id="submit" onclick="clickSubmit('#tdEdit2')" type="button">编辑</button>
+				<button class="btn btn-small" value="编辑" onclick="setvalue('#hotpnt2')"  type="button">编辑 </button>  
 			</td>
 		</tr>
 		<tr>
 			<td id="title">坐标位置</td>
-			<td width="150"  id="tdEdit3"><label>(1000,500)</label>
-			</td>
+			<td width=50;><input  type="text" class="hotpnt3"  value="<%=hotPnt.getdPosX()%>" disabled />
+			<input type="text" class="hotpnt3"  value="<%=hotPnt.getdPosY()%>" disabled /></td>
+			
 			<td>
-				<button class="btn btn-small" value="编辑" id="submit" onclick="clickSubmit('#tdEdit3')" type="button">编辑</button>
+				<button class="btn btn-small" value="编辑" onclick="setvalue('.hotpnt3')"  type="button">编辑 </button> 
 			</td>
 
 		</tr>
@@ -78,7 +85,7 @@ margin-left:35%;}
 </div>
 <script type="text/javascript">
 						
-						function clickSubmit(id){
+						function setvalue(id){
 							var changeVal=$(id);
 							 $(changeVal).removeAttr("disabled");		
 						}
