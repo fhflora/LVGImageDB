@@ -40,4 +40,111 @@ public class ImageInfo {
     	dLeftBottomX = -1.0;
     	dLeftBottomY = -1.0;
     }
+
+	public long getnImageID() {
+		return nImageID;
+	}
+
+	public void setnImageID(long nImageID) {
+		this.nImageID = nImageID;
+	}
+
+	public int getnTableID() {
+		return nTableID;
+	}
+
+	public void setnTableID(int nTableID) {
+		this.nTableID = nTableID;
+	}
+
+	public String getStrFilePath() {
+		return strFilePath;
+	}
+
+	public void setStrFilePath(String strFilePath) {
+		this.strFilePath = strFilePath;
+	}
+
+	public String getStrImageName() {
+		return strImageName;
+	}
+
+	public void setStrImageName(String strImageName) {
+		this.strImageName = strImageName;
+	}
+
+	public String getStrDescInfo() {
+		return strDescInfo;
+	}
+
+	public void setStrDescInfo(String strDescInfo) {
+		this.strDescInfo = strDescInfo;
+	}
+
+	public Date getDtAcquireTime() {
+		return dtAcquireTime;
+	}
+
+	public void setDtAcquireTime(Date dtAcquireTime) {
+		this.dtAcquireTime = dtAcquireTime;
+	}
+
+	public Date getDtInputTime() {
+		return dtInputTime;
+	}
+
+	public void setDtInputTime(Date dtInputTime) {
+		this.dtInputTime = dtInputTime;
+	}
+
+	public boolean isbFlagInfo() {
+		return bFlagInfo;
+	}
+
+	public void setbFlagInfo(boolean bFlagInfo) {
+		this.bFlagInfo = bFlagInfo;
+	}
+
+	public int getnImageSize() {
+		return nImageSize;
+	}
+
+	public void setnImageSize(int nImageSize) {
+		this.nImageSize = nImageSize;
+	}
+
+	public String getStrImageFormat() {
+		return strImageFormat;
+	}
+
+	public void setStrImageFormat(String strImageFormat) {
+		this.strImageFormat = strImageFormat;
+	}
+
+	public Double getdResolution() {
+		return dResolution;
+	}
+
+	public void setdResolution(Double dResolution) {
+		this.dResolution = dResolution;
+	}
+
+	public Double getdLeftBottomX() {
+		return dLeftBottomX;
+	}
+
+	public void setdLeftBottomX(Double dLeftBottomX) {
+		this.dLeftBottomX = dLeftBottomX;
+	}
+
+	public Double getdLeftBottomY() {
+		return dLeftBottomY;
+	}
+
+	public void setdLeftBottomY(Double dLeftBottomY) {
+		this.dLeftBottomY = dLeftBottomY;
+	}
+    
+    
+    
 }

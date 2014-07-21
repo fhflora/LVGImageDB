@@ -84,7 +84,7 @@
 	<button class="btn btn-large" type="submit" name="submit">创建用户</button>
 	<button class="btn btn-large" type="reset"  name="reset"  value="取消">取消</button>
 
-</fieldset> 
+
 </form>
 </body>
 </html>

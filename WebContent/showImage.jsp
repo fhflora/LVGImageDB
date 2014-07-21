@@ -24,9 +24,7 @@
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/boot-business.js"></script>
-    <style type="text/css">
-
-</style>
+   
 </head>
 <body>
 <!-- 页面顶端导航和搜索框 -->

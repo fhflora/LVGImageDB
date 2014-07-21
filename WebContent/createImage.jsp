@@ -145,7 +145,9 @@
 					<a class="btn btn-large" href="#" id="upload">上传影像</a>
 
 				</div>
-			</span> <span class="span8 offset1"> <img src="img/images/1.jpg"
+				
+			</span> 
+			<span class="span8 offset1"> <img src="img/images/1.jpg"
 				class="img-polaroid" alt="">
 			</span>
 		</div>
