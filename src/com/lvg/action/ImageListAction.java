@@ -2,20 +2,12 @@ package com.lvg.action;
 
 import java.awt.image.BufferedImage;
 import java.io.*;
-import java.sql.Connection;
 import java.util.*;
 
 import javax.imageio.ImageIO;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletOutputStream;
-
-import org.apache.struts2.ServletActionContext;
-import org.omg.CORBA_2_3.portable.OutputStream;
-
 import com.lvg.model.ShowImage;
 import com.imagedb.*;
 import com.opensymphony.xwork2.ActionSupport;
-import com.opensymphony.xwork2.Result;
 import com.lvg.database.*;
 
 public class ImageListAction extends ActionSupport {
@@ -46,9 +38,6 @@ public class ImageListAction extends ActionSupport {
 					GetConnection.getConn(database));
 
 			Hashtable<Integer, String> nChildTabID = new Hashtable<Integer, String>();
-			System.out.println("普通图像ID："
-					+ imageManage.getTableID(this.tableName));
-			System.out.println(imageManage.getExceMessage());
 			imageManage.getChildTablesID(
 					imageManage.getTableID(this.tableName), nChildTabID);
 
@@ -171,14 +160,18 @@ public class ImageListAction extends ActionSupport {
 	 */
 	public int getImageBytes(long imageID, int imageIndex) {
 
-		ImageCache imageCache = new ImageCache(CacheManager.getSqliteConn(),
+		/*ImageCache imageCache = new ImageCache(CacheManager.getSqliteConn(),
 				database);
 
 		if (!imageCache.isImageExist(imageID)) {
 			imageCache.insertRow(imageID);
 		}
 		InputStream buffin = new ByteArrayInputStream(
-				imageCache.getImage(imageID));
+				imageCache.getImage(imageID));*/
+		
+		ThumbManage thumbManage=new ThumbManage(GetConnection.getConn(database));
+		
+		InputStream buffin = new ByteArrayInputStream(thumbManage.getThumbData(imageID));
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
 		try {
 			img = ImageIO.read(buffin);

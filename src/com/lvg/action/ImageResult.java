@@ -1,6 +1,5 @@
 package com.lvg.action;
 
-import com.opensymphony.*;
 import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.Result;
 

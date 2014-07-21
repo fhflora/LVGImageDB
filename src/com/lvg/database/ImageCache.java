@@ -1,10 +1,6 @@
 package com.lvg.database;
 
-import java.io.*;
 import java.sql.*;
-
-import com.imagedb.ImageDatabase;
-import com.imagedb.ImageManage;
 import com.imagedb.ThumbManage;
 
 public class ImageCache {
