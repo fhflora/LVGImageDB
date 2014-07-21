@@ -1,0 +1,24 @@
+
+.subject-modify{
+	background-color:#E8E8Ea;
+	margin-right:5px;
+ 	padding-right: 5px;
+ 	padding-bottom: 5px;
+  	padding-left: 5px;
+}
+.sub-keywords{
+	display: -moz-inline-stack;
+	display: inline-block;
+	width:40px;
+	color:#CD950C;
+	font-size:12px
+}
+.sub-keytips{
+	color:#CD950C;
+	font-size:12px
+}
+.sub-spp {
+	display: -moz-inline-stack;
+	display: inline-block;
+	width: 90px;
+}
