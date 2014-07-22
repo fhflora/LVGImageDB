@@ -21,8 +21,8 @@ input{
 }
 #offset{
 margin-left:35%;}
-.hotPnt3{
-width:10px;
+.hotpnt3{
+width:30px;
 }
 </style>
 
@@ -59,8 +59,8 @@ HotPntInfo hotPnt=new HotPntInfo();
 		</tr>
 		<tr>
 			<td id="title">坐标位置</td>
-			<td width=50;><input  type="text" class="hotpnt3"  value="<%=hotPnt.getdPosX()%>" disabled />
-			<input type="text" class="hotpnt3"  value="<%=hotPnt.getdPosY()%>" disabled /></td>
+			<td width=50;>(<input  type="text" class="hotpnt3"  value="<%=hotPnt.getdPosX()%>" disabled />,
+			<input type="text" class="hotpnt3"  value="<%=hotPnt.getdPosY()%>" disabled />)</td>
 			
 			<td>
 				<button class="btn btn-small" value="编辑" onclick="setvalue('.hotpnt3')"  type="button">编辑 </button> 
@@ -76,7 +76,7 @@ HotPntInfo hotPnt=new HotPntInfo();
 
 <form role="form">
 	<div class="form-group">
-		<textarea class="form-control" rows="5" style="width:90%;"></textarea>
+		<textarea class="form-control" rows="5" style="width:90%;"><%=hotPnt.getStrRemark()%></textarea>
 	</div>
 </form>
 <div id="offset">
