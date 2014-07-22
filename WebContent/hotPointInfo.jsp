@@ -34,7 +34,7 @@ HotPntInfo hotPnt=new HotPntInfo();
 	<div>
 		<h2>标注信息</h2>
 	</div>
-
+<form action="">
 	<table>
 
 		<tr>
@@ -73,16 +73,16 @@ HotPntInfo hotPnt=new HotPntInfo();
 		</tr>
 	</table>
 </div>
-
-<form role="form">
-	<div class="form-group">
+<div >
 		<textarea class="form-control" rows="5" style="width:90%;"><%=hotPnt.getStrRemark()%></textarea>
-	</div>
-</form>
-<div id="offset">
-<a class="btn btn-large" href="#">确认修改</a>
-<a class="btn btn-large" href="#">取消</a>
 </div>
+
+<div id="offset">
+
+<button type="submit" class="btn btn-default">确认修改</button>
+
+</div>
+</form>
 <script type="text/javascript">
 						
 						function setvalue(id){
