@@ -167,7 +167,9 @@ function toolbar(com,grid){
             }  
        }  
     }else if (com=='添加'){  
-    	document.getElementById('aid_new').click();
+    	//document.getElementById('aid_new').click();
+       $(".span3").html("");
+       $(".span3").append("<jsp:include page='newUser.jsp'></jsp:include>");
     }else if (com=='修改'){  
         
         if($(".trSelected").length==1){  
@@ -274,93 +276,15 @@ margin-top:50px;
 		<div class="container">
 			<div class="row">
 
-				<div style="height: 600px; float: left; margin-left: 20px;margin-top:200px;"></div>
-
+				<span class="span3">
+				<jsp:include page="search.jsp"></jsp:include>
+				</span>
+				<span class="span9">
 				<table id="flex1" style="display: none">
 				</table>
-
+				</span>
 			</div>
 		</div>
-	</div>
-
-	<s:iterator value="userInfoList" id="userInfo">
-
-		<a id="aid_<s:property value='#userInfo.userID' />"
-			style="display: none"
-			href="#TB_inline?height=300&width=610&inlineId=div<s:property value='#userInfo.userID' />&modal=true"
-			class="thickbox">修改</a>
-
-		<div id="div<s:property value='#userInfo.userID' />"
-			style="display: none">
-
-			<input name='userInfo.userID'
-				value='<s:property value="#userInfo.userID" />' type="hidden" /> <span
-				class='sub-spp'>用户名</span><span class='sub-keywords'></span><input
-				id='userName_<s:property value="#userInfo.userID" />'
-				value='<s:property value="#userInfo.userName" />' type='text' /> </br>
-			<span class='sub-spp'>密码</span><span class='sub-keywords'></span><input
-				id='password_<s:property value="#userInfo.userID" />'
-				value='<s:property value="#userInfo.password"/>' type='text' /><span
-				class='sub-keytips'> 多个关键词请用空格分离，至少出现一个 </span> </br>
-			<span class='sub-spp'>用户类型</span><span class='sub-keywords'></span><input
-				id='userType_<s:property value="#userInfo.userID" />'
-				value='<s:property value="#userInfo.userType"/>' type='text' /><span
-				class='sub-keytips'> 多个关键词请用空格分离，没有则不填 </span> </br>
-			<span class='sub-spp'>电话</span><span class='sub-keywords'></span><input
-				id='tel_<s:property value="#userInfo.userID" />'
-				value='<s:property value="#userInfo.tel"/>' type='text' /><span
-				class='sub-keytips'> 多个关键词请用空格分离，没有则不填 </span> </br>
-			<span class='sub-spp'>邮箱</span><span class='sub-keywords'></span><input
-				id='email_<s:property value="#userInfo.userID" />'
-				value='<s:property value="#userInfo.email"/>' type='text' /><span
-				class='sub-keytips'> 多个关键词请用空格分离，没有则不填 </span> </br>
-			</br>
-			<div>
-				<span class='sub-spp'></span><span class='sub-keywords'></span> <input
-					class="btn btn-primary btn-sm" type="submit" value="修改"
-					onclick="modifyUserInfo(<s:property value='#userInfo.userID' />)">&nbsp;&nbsp;&nbsp;&nbsp;
-				<input type="button" class="btn btn-primary btn-sm"
-					onclick="tb_remove()" value="关闭" />
-			</div>
-
-		</div>
-	</s:iterator>
-
-
-	<a id="aid_new"
-		href="#TB_inline?height=350&width=610&inlineId=div_new&modal=true"
-		class="thickbox" style="display: none">添加</a>
-
-	<div id="div_new" style="display: none">
-
-		<span class='sub-spp'>用户名</span><span class='sub-keywords'></span><input
-			id='userName_new' value='' type='text' /> </br>
-		<span class='sub-spp'>密码</span><span class='sub-keywords'></span><input
-			id='password_new' value='' type='text' /><span class='sub-keytips'>
-			多个关键词请用空格分离，至少出现一个 </span> </br>
-		<span class='sub-spp'>用户类型</span><span class='sub-keywords'></span><input
-			id='userType_new' value='' type='text' /><span class='sub-keytips'>
-			多个关键词请用空格分离，没有则不填 </span> </br>
-		<span class='sub-spp'>电话</span><span class='sub-keywords'></span><input
-			id='tel_new' value='' type='text' /><span class='sub-keytips'>
-			多个关键词请用空格分离，没有则不填 </span> </br>
-		<span class='sub-spp'>邮箱</span><span class='sub-keywords'></span><input
-			id='email_new' value='' type='text' /><span class='sub-keytips'>
-			多个关键词请用空格分离，没有则不填 </span> </br> <span class='sub-spp'>真实姓名</span><span
-			class='sub-keywords'></span><input id='realName_new' value=''
-			type='text' /> </br> <span class='sub-spp'>用户权限</span><span
-			class='sub-keywords'></span><input id='permission_new' value=''
-			type='text' /> </br> <span class='sub-spp'>备注</span><span
-			class='sub-keywords'></span><input id='remark_new' value=''
-			type='text' />
-		<div>
-			<span class='sub-spp'></span><span class='sub-keywords'></span> <input
-				class="btn btn-primary btn-sm" type="submit" value="添加"
-				onclick="insertUserInfo()">&nbsp;&nbsp;&nbsp;&nbsp; <input
-				type="button" class="btn btn-primary btn-sm" onclick="tb_remove()"
-				value="关闭" />
-		</div>
-
 	</div>
 </body>
 </html>

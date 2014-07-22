@@ -22,10 +22,10 @@ public class PaginationAction extends ActionSupport {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	public List rows; // 某领导专题 page列表
-	public Integer page; // 某领导专题 page列表的当前页
-	public Integer total; // 某领导专题 page列表的总数
-	public Integer rp; // 一页显示多少个文档
+	public List rows; // page列表
+	public Integer page; //  page列表的当前页
+	public Integer total; //  page列表的总数
+	public Integer rp; // 一页显示多少个
 	public String sortname; // 按sortname排序
 	public String sortorder; // desc或者asc
 	
@@ -59,11 +59,21 @@ public class PaginationAction extends ActionSupport {
 		cellList.add(userInfo.getUserID());
 		cellList.add(userInfo.getUserName());
 		cellList.add(userInfo.getRealName());
-		cellList.add(userInfo.getUserType());
+		if(userInfo.getUserType()==1){
+			cellList.add("用户");
+		}else{
+			cellList.add("管理员");
+		}
 		cellList.add(userInfo.getTel());
 		cellList.add(userInfo.getEmail());
 		cellList.add(userInfo.getPermission());
-		cellList.add(userInfo.getState());
+		
+		if(userInfo.getState()==0){
+			cellList.add("已登录");
+		}else{
+			cellList.add("未登录");
+		}
+		
 		cellList.add(userInfo.getLastTime());
 		return cellList;
 	}

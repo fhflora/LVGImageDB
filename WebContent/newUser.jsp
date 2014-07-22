@@ -1,12 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>创建用户表单</title>
-</head>
-<body>
+
+
 <%--创建用户的表单 --%>
 <form name="userInfo" action="addUser" method="post">
  <h4 class="form-sigin-heading">用户信息</h4>
@@ -17,7 +12,7 @@
 	</div>
  	<div class="control-group">
       <div class="controls">
-		<input type="text" name="realName" class="input-block-level" placeholder="真实姓名" required>
+		<input type="text" name="RealName" class="input-block-level" placeholder="真实姓名" required>
 	  </div>
 	</div>
 	<div class="control-group">
@@ -84,7 +79,4 @@
 	<button class="btn btn-large" type="submit" name="submit">创建用户</button>
 	<button class="btn btn-large" type="reset"  name="reset"  value="取消">取消</button>
 
-
 </form>
-</body>
-</html>
