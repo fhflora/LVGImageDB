@@ -218,7 +218,9 @@ function modifyUserInfo(userID){
 	var tel = $("#tel_"+userID).val();
 	var email = $("#email_"+userID).val();
 	var permission=0;
-	$('input:[name="checkboxPemission_"'+userID+']:checked').each(function(){
+	var checkboxId="input[name='checkboxPermission_"+userID+"']:checked";
+	alert(checkboxId);
+	$(checkboxId).each(function(){
 		permission+=parseInt($(this).attr('value'));		
 		alert($(this).attr('value'));
 	});
