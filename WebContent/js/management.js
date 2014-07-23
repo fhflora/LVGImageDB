@@ -220,6 +220,7 @@ function modifyUserInfo(userID){
 	var permission=0;
 	$('input:[name="checkboxPemission_"'+userID+']:checked').each(function(){
 		permission+=parseInt($(this).attr('value'));		
+		alert($(this).attr('value'));
 	});
 	permission=8;
 	
@@ -237,12 +238,12 @@ function modifyUserInfo(userID){
         success: function(json){  
         	var msg = json.message;
         	if(msg=='success'){
-        		alert("用户ID:"+userID+"信息修改成功");
-        		$("#flex1").flexReload();  
+        		alert("用户ID:"+userID+"信息修改成功");  
         	}
         	else
             	alert("用户ID:"+userID+"信息修改失败");
         	tb_remove();
+        	$("#flex1").flexReload();
         },  
         error: function(msg){  
             alert(msg);  

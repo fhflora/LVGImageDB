@@ -144,34 +144,34 @@ margin-top:50px;
 				
 				<label class="checkbox inline">
 				<s:if test="(#userInfo.permission&1)==1" >
-					<input type="checkbox" name='checkboxPemission_<s:property value="#userInfo.userID" />' value=1 checked>导入影像
+					<input type="checkbox" name='checkboxPermission_<s:property value="#userInfo.userID" />' value=1 checked>导入影像
 				</s:if>
 				<s:else>
-				<input type="checkbox" name='checkboxPemission_<s:property value="#userInfo.userID" />' value=1>导入影像
+				<input type="checkbox" name='checkboxPermission_<s:property value="#userInfo.userID" />' value=1>导入影像
 				</s:else>
 				</label>
 				<label class="checkbox inline">
 				<s:if test="(#userInfo.permission&2)==2" >
-					<input type="checkbox" name='checkboxPemission_<s:property value="#userInfo.userID" />' value=2 checked>删除影像
+					<input type="checkbox" name='checkboxPermission_<s:property value="#userInfo.userID" />' value=2 checked>删除影像
 				</s:if>
 				<s:else>
-					<input type="checkbox" name='checkboxPemission_<s:property value="#userInfo.userID" />' value=2>删除影像
+					<input type="checkbox" name='checkboxPermission_<s:property value="#userInfo.userID" />' value=2>删除影像
 				</s:else>
 				</label>	
 				<label class="checkbox inline">
 				<s:if test="(#userInfo.permission&4)==4" >
-					<input type="checkbox" name='checkboxPemission_<s:property value="#userInfo.userID" />' value=4 checked>编辑影像
+					<input type="checkbox" name='checkboxPermission_<s:property value="#userInfo.userID" />' value=4 checked>编辑影像
 				</s:if>
 				<s:else>
-					<input type="checkbox" name='checkboxPemission_<s:property value="#userInfo.userID" />' value=4 >编辑影像
+					<input type="checkbox" name='checkboxPermission_<s:property value="#userInfo.userID" />' value=4 >编辑影像
 				</s:else>
 				</label>
 				<label class="checkbox inline">	
 				<s:if test="(#userInfo.permission&8)==8" >
-					<input type="checkbox" name='checkboxPemission_<s:property value="#userInfo.userID" />' value=8 checked> 导出影像
+					<input type="checkbox" name='checkboxPermission_<s:property value="#userInfo.userID" />' value=8 checked> 导出影像
 				</s:if>
 				<s:else>
-					<input type="checkbox" name='checkboxPemission_<s:property value="#userInfo.userID" />' value=8> 导出影像
+					<input type="checkbox" name='checkboxPermission_<s:property value="#userInfo.userID" />' value=8> 导出影像
 				</s:else>
 				</label>
 				</br>
