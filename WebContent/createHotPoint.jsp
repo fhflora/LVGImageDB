@@ -16,14 +16,31 @@ td {
 tr {
 	height: 50px;
 }
-input{
-	width:70%;
+#pointName{
+	width:80%;
+	margin-right:-20%;
 }
 #offset{
 margin-left:35%;}
+
 .hotpnt3{
 width:30px;
 }
+
+select{
+width:88%;
+margin-right:-20%;
+}
+
+#pointData{
+margin-top:-3%;
+margin-left:1%;
+}
+
+#pointInfo{
+margin-top:9%;
+}
+
 </style>
 
 </head>
@@ -40,36 +57,45 @@ HotPntInfo hotPnt=new HotPntInfo();
 		
 		<tr>
 			<td id="title">标注名称</td>
-			<td><input type="text" class="form-control" id="name"
+			<td><input type="text" class="form-control" id="pointName"
 								placeholder="标注名称" />
 			</td>
 			
 		</tr>
 		<tr>
 			<td id="title">标注类型</td>
-			<td><input type="text" id="hotpnt2"  value="<%=hotPnt.getnType()%>" disabled />
+			<td ><select class="for-control">
+								<option value="">标注类型1</option>
+								<option value="">标注类型2</option>
+								<option value="">标注类型3</option>
+							</select>
 			</td>
 			
 		</tr>
-		<tr>
-			<td id="title">坐标位置</td>
-			<td width=50;>(<input  type="text" class="hotpnt3"  value="<%=hotPnt.getdPosX()%>" disabled />,
-			<input type="text" class="hotpnt3"  value="<%=hotPnt.getdPosY()%>" disabled />)</td>
-		
-		</tr>
-		<tr>
-			<td id="title">备注信息</td>
-			<td width="150"></td>
-		</tr>
 	</table>
 </div>
+<div id="pointData">标记数据</div>
+<input id="lefile" type="file" style="display:none;">  
+<!-- 浏览文件夹 -->
+<div class="input-append">  
+    <input id="photoCover" class="input-large" type="text" style="width:65%;">  
+    <a class="btn" onclick="$('input[id=lefile]').click();">浏览</a>  
+</div> 
+
+<div id="pointInfo">备注信息</div>
 <div >
-		<textarea class="form-control" rows="5" style="width:90%;"><%=hotPnt.getStrRemark()%></textarea>
+		<textarea class="form-control" rows="5" style="width:85%;"><%=hotPnt.getStrRemark()%></textarea>
 </div>
 
 <div id="offset">
 
-<button type="submit" class="btn btn-default">确认修改</button>
+<button type="submit" class="btn btn-default">创建标注</button>
+<button type="submit" class="btn btn-default">取消</button>
 
 </div>
 </form>
+<script type="text/javascript">  
+$('input[id=lefile]').change(function() {  
+$('#photoCover').val($(this).val());  
+});  
+</script>  

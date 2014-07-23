@@ -37,7 +37,7 @@
 			<result name="input">index.jsp</result>
 		</action>		
 		<action name="managerLogin" class="com.lvg.action.UserAction" method="managerLogin">
-			<result name="success" type="redirect">new_management.jsp</result>
+			<result name="success" >new_management.jsp</result>
 			<result name="input">index.jsp</result>
 		</action>		
 		<action name="LogoutAction" class="com.lvg.action.UserAction" method="logoutAction">
