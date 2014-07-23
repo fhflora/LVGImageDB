@@ -15,7 +15,7 @@ import com.imagedb.UserManage;
 import com.lvg.database.*;
 
 public class UserAction extends ActionSupport implements SessionAware{
-	public UserInfo user;
+	public UserInfo userInfo;
 	private Map<String,Object> session;
 	private String certCode;
 	private UserManage userManage;
@@ -35,11 +35,11 @@ public class UserAction extends ActionSupport implements SessionAware{
 			this.addActionMessage(message);
 			return INPUT;
 		}
-		if(user.getUserName().isEmpty()){
+		if(userInfo.getUserName().isEmpty()){
 			this.addFieldError("userName", "用户名不能为空");
 			return INPUT;
 		}
-		if(user.getPassword().isEmpty()){
+		if(userInfo.getPassword().isEmpty()){
 			this.addFieldError("userName", "用户名不能为空");
 			return INPUT;
 		}
@@ -47,15 +47,15 @@ public class UserAction extends ActionSupport implements SessionAware{
 		
 		userManage=new UserManage(GetConnection.getConn("Test1"));
 		
-		if(userManage.loginCheck(user.getUserName(), user.getPassword(), user.getUserType())!=-1){
-			user=(UserInfo) userManage.getUserInfo(userManage.loginCheck(user.getUserName(), user.getPassword(), user.getUserType()));
+		if(userManage.loginCheck(userInfo.getUserName(), userInfo.getPassword(), userInfo.getUserType())!=-1){
+			userInfo=(UserInfo) userManage.getUserInfo(userManage.loginCheck(userInfo.getUserName(), userInfo.getPassword(), userInfo.getUserType()));
 
-			user.setState((byte) 0);
-			userManage.setUserInfo(user);
-			session.put("user", user);
-			session.put("username", user.getUserName());
+			userInfo.setState((byte) 0);
+			userManage.setUserInfo(userInfo);
+			session.put("userInfo", userInfo);
+			session.put("username", userInfo.getUserName());
 			session.put("lvg_login", true);
-			session.put("permission",user.getPermission());
+			session.put("permission",userInfo.getPermission());
 			GetConnection.closeAll();
 			return SUCCESS;
 		}else{
@@ -71,17 +71,20 @@ public class UserAction extends ActionSupport implements SessionAware{
 	 * @return
 	 */
 	public String managerLogin(){
+		userInfoList=new LinkedList<UserInfo>();
+		userManage=new UserManage(GetConnection.getConn("Test1"));
+		userManage.getAllUserInfo((LinkedList<UserInfo>)userInfoList);
 		String  message="验证码错误，请重新输入！";
 		if(!certCode.equals(ServletActionContext.getRequest().getSession().getAttribute("rand")))
 		{
 			this.addActionMessage(message);
 			return INPUT;
 		}
-		if(user.getUserName().isEmpty()){
+		if(userInfo.getUserName().isEmpty()){
 			this.addFieldError("userName", "用户名不能为空");
 			return INPUT;
 		}
-		if(user.getPassword().isEmpty()){
+		if(userInfo.getPassword().isEmpty()){
 			this.addFieldError("userName", "用户名不能为空");
 			return INPUT;
 		}
@@ -89,15 +92,15 @@ public class UserAction extends ActionSupport implements SessionAware{
 		
 		userManage=new UserManage(GetConnection.getConn("Test1"));
 		
-		if(userManage.loginCheck(user.getUserName(), user.getPassword(), user.getUserType())!=-1){
-			user=(UserInfo) userManage.getUserInfo(userManage.loginCheck(user.getUserName(), user.getPassword(), user.getUserType()));
+		if(userManage.loginCheck(userInfo.getUserName(), userInfo.getPassword(), userInfo.getUserType())!=-1){
+			userInfo=(UserInfo) userManage.getUserInfo(userManage.loginCheck(userInfo.getUserName(), userInfo.getPassword(), userInfo.getUserType()));
 
-			user.setState((byte) 0);
-			userManage.setUserInfo(user);
-			session.put("user", user);
-			session.put("username", user.getUserName());
+			userInfo.setState((byte) 0);
+			userManage.setUserInfo(userInfo);
+			session.put("userInfo", userInfo);
+			session.put("username", userInfo.getUserName());
 			session.put("lvg_login", true);
-			session.put("permission",user.getPermission());
+			session.put("permission",userInfo.getPermission());
 			GetConnection.closeAll();
 			return SUCCESS;
 		}else{
@@ -114,9 +117,9 @@ public class UserAction extends ActionSupport implements SessionAware{
 	public String logoutAction(){
 		
 		userManage=new UserManage(GetConnection.getConn("Test1"));
-		user=(UserInfo)session.get("user");
-		user.setState((byte) 1);
-		if(userManage.setUserInfo(user)){
+		userInfo=(UserInfo)session.get("userInfo");
+		userInfo.setState((byte) 1);
+		if(userManage.setUserInfo(userInfo)){
 			GetConnection.closeAll();
 			return SUCCESS;
 		}else{
@@ -145,11 +148,15 @@ public class UserAction extends ActionSupport implements SessionAware{
 	 * @return
 	 */
 	public String insertUserInfo(){
-		Date date = new Date(new java.util.Date().getTime());
-		user.setCreateTime(date);
+		Date sqlDate=new Date(new java.util.Date().getTime());  
+		userInfo.setCreateTime(sqlDate);
+		UserInfo manager=(UserInfo)session.get("userInfo");
+		userInfo.setCreatedBy(manager.getUserName());
+		userInfo.setState((byte)1);
+		userInfo.setLastTime(sqlDate);
 		userManage=new UserManage(GetConnection.getConn("Test1"));
-		userManage.addUse(user);
-		userID=userManage.getUserID(user.getUserName());
+		userManage.addUse(userInfo);
+		System.out.println(userManage.getExceMessage());
 		GetConnection.closeAll();
 		return SUCCESS;
 	}
@@ -159,10 +166,20 @@ public class UserAction extends ActionSupport implements SessionAware{
 	 * @return
 	 */
 	public String modifyUserInfo(){
-		System.out.println("Modify------"+1);
+
 		userManage=new UserManage(GetConnection.getConn("Test1"));
-		userManage.setUserInfo(user);
-		System.out.println("Modify------"+2);
+		UserInfo tempUser=userManage.getUserInfo(userInfo.nID);
+		
+		tempUser.setUserName(userInfo.getUserName());
+		tempUser.setRealName(userInfo.getRealName());
+		tempUser.setPassword(userInfo.getPassword());
+		tempUser.setUserType(userInfo.getUserType());
+		tempUser.setEmail(userInfo.getEmail());
+		tempUser.setTel(userInfo.getTel());
+		tempUser.setRemark(userInfo.getRemark());
+		tempUser.setPermission(userInfo.getPermission());
+		userManage.setUserInfo(tempUser);
+		System.out.println(userManage.getExceMessage());
 		GetConnection.closeAll();
 		return SUCCESS;
 	}
@@ -206,10 +223,10 @@ public class UserAction extends ActionSupport implements SessionAware{
 	}
 	
 	public UserInfo getUser() {
-		return user;
+		return userInfo;
 	}
-	public void setUser(UserInfo user) {
-		this.user = user;
+	public void setUser(UserInfo userInfo) {
+		this.userInfo = userInfo;
 	}
 
 	public String getCertCode() {
@@ -221,11 +238,11 @@ public class UserAction extends ActionSupport implements SessionAware{
 	}
 	
 	public UserInfo getUserInfo() {
-		return user;
+		return userInfo;
 	}
 
 	public void setUserInfo(UserInfo userInfo) {
-		this.user = userInfo;
+		this.userInfo = userInfo;
 	}
 
 	public int getUserID() {

@@ -66,7 +66,7 @@ public class PaginationAction extends ActionSupport {
 		}
 		cellList.add(userInfo.getTel());
 		cellList.add(userInfo.getEmail());
-		cellList.add(userInfo.getPermission());
+		cellList.add(this.showPermission(userInfo.getPermission()));
 		
 		if(userInfo.getState()==0){
 			cellList.add("已登录");
@@ -75,9 +75,28 @@ public class PaginationAction extends ActionSupport {
 		}
 		
 		cellList.add(userInfo.getLastTime());
+		cellList.add(userInfo.getCreatedBy());
+		cellList.add(userInfo.getRemark());
 		return cellList;
 	}
-
+	public String showPermission(int permission){
+		String strPermission="";
+		
+		if((permission&1)!=0){
+			strPermission+="导入";
+		}
+		if((permission&2)!=0){
+			strPermission+=" 删除 ";
+		}
+		if((permission&4)!=0){
+			strPermission+=" 编辑 ";
+		}
+		if((permission&8)!=0){
+			strPermission+=" 导出";
+		}
+		return strPermission;
+		
+	}
 	public List getRows() {
 		return rows;
 	}
