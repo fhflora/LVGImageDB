@@ -21,6 +21,7 @@ public class PaginationAction extends ActionSupport {
 	/**
 	 * 
 	 */
+	private int userID;
 	private static final long serialVersionUID = 1L;
 	public List rows; // page列表
 	public Integer page; //  page列表的当前页
@@ -28,15 +29,54 @@ public class PaginationAction extends ActionSupport {
 	public Integer rp; // 一页显示多少个
 	public String sortname; // 按sortname排序
 	public String sortorder; // desc或者asc
-	
+	public String qtype;
+	public String query;
 	private UserManage userManage;
+	
+	
+	public String getQtype() {
+		return qtype;
+	}
+
+	public void setQtype(String qtype) {
+		this.qtype = qtype;
+	}
+
+	public String getQuery() {
+		return query;
+	}
+
+	public void setQuery(String query) {
+		this.query = query;
+	}
+
+	public int getUserID() {
+		return userID;
+	}
+
+	public void setUserID(int userID) {
+		this.userID = userID;
+	}
+
 	
 	public String UserListPagination() {
 		List<UserInfo> userInfoList = new LinkedList<UserInfo>();
 		userManage=new UserManage(GetConnection.getConn("Test1"));
-		userManage.getAllUserInfo((LinkedList<UserInfo>) userInfoList);
+		
+		System.out.println("qtype:"+qtype+" value:"+query);
+		if(query.isEmpty() || query.trim().equals(""))
+			userManage.getAllUserInfo((LinkedList<UserInfo>) userInfoList);
+		else if(qtype.equals("userID")){
+			userInfoList.add(userManage.getUserInfo(Integer.parseInt(query)));
+		}else if(qtype.equals("userName")){
+			
+		}else if(qtype.equals("complexQuery")){
+			
+		}
+		
 		rows = new ArrayList();
 		total = userInfoList.size();
+		System.out.println("total:"+total);
 		int serial = (page - 1) * rp + 1;
 		for (int i = (page - 1) * rp; i < page * rp; i++) {
 			if (i >= userInfoList.size())

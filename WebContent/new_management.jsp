@@ -22,9 +22,7 @@
 <!-- Bootbusiness theme -->
 <link href="css/boot-business.css" rel="stylesheet">
 <!-- Manage css -->
-<link href="css/manage.css" rel="stylesheet">
 <!-- Jquery DataTable -->
-<link href="css/DT-bootstrap.css" rel="stylesheet">
 <link href="css/ManageSubject.css" rel="stylesheet">
 <link href="css/thickbox.css" rel="stylesheet">
 <link href="css/flexigrid.css" rel="stylesheet">
@@ -32,17 +30,20 @@
 <script type="text/javascript" src="js/jquery.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/boot-business.js"></script>
-<script type="text/javascript" src="js/jquery.js"></script>
-<script type="text/javascript" src="js/jquery.dataTables.js"></script>
-<script type="text/javascript" src="js/DT-bootstrap.js"></script>
 <script type="text/javascript" src="js/thickbox-compressed.js"></script>
 <script type="text/javascript" src="js/flexigrid.js"></script>
 <script type="text/javascript" src="js/management.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
 	getUserInfoPageList();
+	$("#search").click(function(){
+		var userID = $("#userID").val();
+		alert(userID);
+		$("#flex1").flexOptions({qtype:'userID', query:userID});定义好搜索内容和条件
+		$('#flex1').flexReload();重新loading数据
+		
+	});
 });
-
 </script>
 <style>
 .btn {

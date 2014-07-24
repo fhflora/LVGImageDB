@@ -3,11 +3,11 @@
 
 
 <%--创建用户的表单 --%>
-<form name="userInfoSearch" action="seachUser" method="post">
+<form name="userInfoSearch" action="getOneUserInfo.action" method="post">
  <h4 class="form-sigin-heading">用户搜索</h4>
     <div class="control-group">
       <div class="controls">
-		<input type="text" name="userName" class="input-block-level" placeholder="用户名">
+		<input type="text" name="userID" id="userID" class="input-block-level" placeholder="用户ID">
 	  </div>
 	</div>
 	<div class="control-group">
@@ -54,7 +54,7 @@
 		</div>
 	</div>
 
-	<button class="btn btn-large" type="submit" name="submit">搜索</button>
+	<button class="btn btn-large" type="button" name="submit"id="search">搜索</button>
 	<button class="btn btn-large" type="reset"  name="reset"  value="取消">取消</button>
 
 </form>

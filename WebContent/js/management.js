@@ -1,8 +1,8 @@
-function getUserInfoPageList() {
-	
+
+function getUserInfoPageList() {//改过
 	$("#flex1").flexigrid(
 		{
-			url : 'UserListPagination',
+			url : 'UserListPagination.action',
 			dataType : 'json',
 			colModel : [ {
 				display : '序号',
@@ -81,10 +81,17 @@ function getUserInfoPageList() {
 			}],
 			buttons : [  
 			            {name: '添加', bclass: 'add', onpress : toolbar},  
-			            {name: '删除', bclass: 'delete', onpress : toolbar},  
+			            {separator: true},
+			            {name: '删除', bclass: 'delete', onpress : toolbar}, 
+			            {separator: true},
 			            {name: '修改', bclass: 'modify', onpress : toolbar},                
 			            {separator: true}  
 			            ], 
+            searchitems : [
+                   		{display: '用户ID', name : 'userID', isdefault: true},
+                   		{display: '用户名', name : 'userName'}
+                   		
+                   		],
 			sortname : "serial",
 			sortorder : "desc",
 			usepager: true,                //是否分页
@@ -99,7 +106,7 @@ function getUserInfoPageList() {
 			nomsg: '不存在记录!',     
 			pagestat: '显示{from}至{to} 条  共{total} 条',                       
 			errormsg:'连接失败,请重试',     
-			showToggleBtn: false,    
+			showTableToggleBtn: true,  
 			autoload: true              //不允许自动加载 
 		});
 }

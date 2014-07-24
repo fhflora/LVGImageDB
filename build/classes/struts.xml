@@ -19,7 +19,9 @@
 				<interceptor-ref name="defaultStack"></interceptor-ref>		
 				<interceptor-ref name="LoginInterceptor"></interceptor-ref>
 			</interceptor-stack>
-		</interceptors>	 		
+		</interceptors>
+		<!--获取一个用户Action-->
+			 		
 		<action name="insertUserInfo" class="com.lvg.action.UserAction" method="insertUserInfo">
 			<result name="success" type="chain">userInfoList</result>
 		</action>			

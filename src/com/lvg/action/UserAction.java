@@ -24,6 +24,7 @@ public class UserAction extends ActionSupport implements SessionAware{
 	private int userID;
 	private String message;
 	
+	
 	/**
 	 * 用户登录action
 	 * @return
