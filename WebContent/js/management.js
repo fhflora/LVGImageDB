@@ -124,7 +124,7 @@ function toolbar(com,grid){
                         dataType:"json",  
                         success: function(json){  
                         	var msg = json.message;
-                        	alert(msg)
+                        	alert(msg);
                             $("#flex1").flexReload();  
                             
                         },  
@@ -160,7 +160,12 @@ function insertUserInfo(){
 		return;
 	}
 	var remark=$("#remark_new").val();
-	var permission=$("#permission_new").val();
+	var permission=0;
+	var checkboxId="input[name='permission_new']:checked";
+	$(checkboxId).each(function(){
+		permission+=parseInt($(this).attr('value'));		
+	});
+
 	var password = $("#password_new").val();
 	if(password==""){
 		$("#keytipsPassword_new").html("*密码不能为空");
@@ -219,13 +224,10 @@ function modifyUserInfo(userID){
 	var email = $("#email_"+userID).val();
 	var permission=0;
 	var checkboxId="input[name='checkboxPermission_"+userID+"']:checked";
-	alert(checkboxId);
 	$(checkboxId).each(function(){
 		permission+=parseInt($(this).attr('value'));		
-		alert($(this).attr('value'));
 	});
-	permission=8;
-	
+
 	var remark=$("#remark_"+userID).val();
 	
 	var data={"userInfo.userID":userID,"userInfo.userName":userName,"userInfo.realName":realName,
@@ -240,10 +242,10 @@ function modifyUserInfo(userID){
         success: function(json){  
         	var msg = json.message;
         	if(msg=='success'){
-        		alert("用户ID:"+userID+"信息修改成功");  
+        		alert("用户信息修改成功");  
         	}
         	else
-            	alert("用户ID:"+userID+"信息修改失败");
+            	alert("用户信息修改失败");
         	tb_remove();
         	$("#flex1").flexReload();
         },  
