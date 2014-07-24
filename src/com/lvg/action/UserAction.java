@@ -159,6 +159,7 @@ public class UserAction extends ActionSupport implements SessionAware{
 		userManage.addUse(userInfo);
 		System.out.println(userManage.getExceMessage());
 		GetConnection.closeAll();
+		this.setMessage("success");
 		return SUCCESS;
 	}
 	
@@ -182,6 +183,7 @@ public class UserAction extends ActionSupport implements SessionAware{
 		userManage.setUserInfo(tempUser);
 		System.out.println(userManage.getExceMessage());
 		GetConnection.closeAll();
+		this.setMessage("success");
 		return SUCCESS;
 	}
 	
@@ -193,6 +195,7 @@ public class UserAction extends ActionSupport implements SessionAware{
 		userManage=new UserManage(GetConnection.getConn("Test1"));
 		userManage.deleteUser(userID);
 		GetConnection.closeAll();
+		this.setMessage("用户删除成功");
 		return SUCCESS;
 	}
 	

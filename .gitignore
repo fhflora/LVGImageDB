@@ -40,3 +40,4 @@ Icon
 *.class
 build/classes/com/lvg/database/GetConnection.class
 build/classes/com/lvg/database/GetConnection.class
+WebContent/js/management.js
