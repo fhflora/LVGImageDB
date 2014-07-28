@@ -61,16 +61,36 @@ public class PaginationAction extends ActionSupport {
 	
 	public String UserListPagination() {
 		List<UserInfo> userInfoList = new LinkedList<UserInfo>();
+		UserInfo userInfo=new UserInfo();
 		userManage=new UserManage(GetConnection.getConn("Test1"));
 		
 		System.out.println("qtype:"+qtype+" value:"+query);
 		if(query.isEmpty() || query.trim().equals(""))
 			userManage.getAllUserInfo((LinkedList<UserInfo>) userInfoList);
 		else if(qtype.equals("userID")){
-			userInfoList.add(userManage.getUserInfo(Integer.parseInt(query)));
+			userInfo=userManage.getUserInfo(Integer.parseInt(query));
+			if(userInfo==null){
+				userInfoList.clear();
+			}
+			else{
+				userInfoList.add(userInfo);
+			}
 		}else if(qtype.equals("userName")){
-			
-		}else if(qtype.equals("complexQuery")){
+			userInfo=userManage.getUserInfoByUserName(query.toString());
+			if(userInfo==null){
+				userInfoList.clear();
+			}
+			else{
+				userInfoList.add(userInfo);
+			}
+		}else if(qtype.equals("realName")){
+			userInfo=userManage.getUserInfoByRealName(query.toString());
+			if(userInfo==null){
+				userInfoList.clear();
+			}
+			else{
+				userInfoList.add(userInfo);
+			}
 			
 		}
 		

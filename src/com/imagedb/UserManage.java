@@ -72,7 +72,101 @@ public class UserManage extends ImageDatabase {
 			return false;
 		}
 	}
+	
+	/**
+	 * 通过登陆状态获取用户信息
+	 * @param userName
+	 * @return
+	 */
+	public UserInfo getUserInfoByState(byte state){
+		UserInfo userInfo = new UserInfo();
+		try{
+			StringBuffer strQuery=new StringBuffer("select * from \"00002\" where \"State\" = ");
+			strQuery.append(state);
+			
+			
+			Statement command = hConnection.createStatement();
+			System.out.println(strQuery.toString());
+			ResultSet drResult = command.executeQuery(strQuery.toString());
+			
+			if(!drResult.next()){
+				userInfo=null;
+				strMessage=new StringBuffer("The user is not exist.");
+			}else {
+				userInfo.nID = drResult.getInt("ID");
+				userInfo.createTime = new Date(drResult.getDate("CreateTime").getTime());
+				userInfo.lastLoginTime = new Date(drResult.getDate("LastTime").getTime());			
+				userInfo.nPermission = drResult.getByte("Permission");
+				userInfo.nState = state;
+				userInfo.nType = drResult.getByte("UserType");
+				userInfo.strCreated = drResult.getString("Created");
+				userInfo.strEmail = drResult.getString("Email");
+				userInfo.strLastLoginIP = drResult.getString("LoginIP");
+				userInfo.strPassword = drResult.getString("Password");
+				userInfo.strPhone = drResult.getString("Tel");
+				userInfo.strRealName = drResult.getString("RealName");
+				userInfo.strRemark = drResult.getString("Remark");
+				userInfo.strUserName = drResult.getString("UserName");
+								
+				strMessage = new StringBuffer("Succeed to get the information of the user.");
+			}
 
+			drResult.close();
+			command.close();
+			return userInfo;
+		} catch (Exception ex) {
+			strMessage = new StringBuffer(ex.getMessage());
+			return null;
+		}
+		
+	}
+	
+	/**
+	 * 通过用户名获取用户信息
+	 * @param userName
+	 * @return
+	 */
+	public UserInfo getUserInfoByUserName(String userName){
+		UserInfo userInfo = new UserInfo();
+		try{
+			StringBuffer strQuery=new StringBuffer("select * from \"00002\" where \"UserName\" = ");
+			strQuery.append("'"+userName+"'");
+			
+			
+			Statement command = hConnection.createStatement();
+			System.out.println(strQuery.toString());
+			ResultSet drResult = command.executeQuery(strQuery.toString());
+			
+			if(!drResult.next()){
+				userInfo=null;
+				strMessage=new StringBuffer("The user is not exist.");
+			}else {
+				userInfo.nID = drResult.getInt("ID");
+				userInfo.createTime = new Date(drResult.getDate("CreateTime").getTime());
+				userInfo.lastLoginTime = new Date(drResult.getDate("LastTime").getTime());			
+				userInfo.nPermission = drResult.getByte("Permission");
+				userInfo.nState = drResult.getByte("State");
+				userInfo.nType = drResult.getByte("UserType");
+				userInfo.strCreated = drResult.getString("Created");
+				userInfo.strEmail = drResult.getString("Email");
+				userInfo.strLastLoginIP = drResult.getString("LoginIP");
+				userInfo.strPassword = drResult.getString("Password");
+				userInfo.strPhone = drResult.getString("Tel");
+				userInfo.strRealName = drResult.getString("RealName");
+				userInfo.strRemark = drResult.getString("Remark");
+				userInfo.strUserName = userName;
+								
+				strMessage = new StringBuffer("Succeed to get the information of the user.");
+			}
+
+			drResult.close();
+			command.close();
+			return userInfo;
+		} catch (Exception ex) {
+			strMessage = new StringBuffer(ex.getMessage());
+			return null;
+		}
+	}
 	/** 获取一个用户的信息
 	 * @param nUserID 用户的编号
 	 * @return 成功：返回用户信息<br>失败：返回  null 值 */
@@ -362,8 +456,10 @@ public class UserManage extends ImageDatabase {
 			
 			if (drResult.next()) {
 				nUserID = drResult.getInt("UserName");
+				System.out.println("------------"+nUserID);
 				strMessage = new StringBuffer("Succeed to get the user's ID.");
 			} else {
+				System.out.println("------------>"+nUserID);
 				strMessage = new StringBuffer("The user is not exist.");
 			}
 			
@@ -372,6 +468,7 @@ public class UserManage extends ImageDatabase {
 			return nUserID;
 		} catch (Exception ex) {
 			strMessage = new StringBuffer(ex.getMessage());
+			System.out.println("------------>");
 			return -1;
 		}
 	}
