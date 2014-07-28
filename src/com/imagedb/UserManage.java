@@ -72,7 +72,47 @@ public class UserManage extends ImageDatabase {
 			return false;
 		}
 	}
-	
+	public UserInfo getUserInfoByRealName(String realName){
+		UserInfo userInfo = new UserInfo();
+		try{
+			StringBuffer strQuery=new StringBuffer("select * from \"00002\" where \"RealName\" = ");
+			strQuery.append("'"+realName+"'");
+			
+			
+			Statement command = hConnection.createStatement();
+			System.out.println(strQuery.toString());
+			ResultSet drResult = command.executeQuery(strQuery.toString());
+			
+			if(!drResult.next()){
+				userInfo=null;
+				strMessage=new StringBuffer("The user is not exist.");
+			}else {
+				userInfo.nID = drResult.getInt("ID");
+				userInfo.createTime = new Date(drResult.getDate("CreateTime").getTime());
+				userInfo.lastLoginTime = new Date(drResult.getDate("LastTime").getTime());			
+				userInfo.nPermission = drResult.getByte("Permission");
+				userInfo.nState = drResult.getByte("State");
+				userInfo.nType = drResult.getByte("UserType");
+				userInfo.strCreated = drResult.getString("Created");
+				userInfo.strEmail = drResult.getString("Email");
+				userInfo.strLastLoginIP = drResult.getString("LoginIP");
+				userInfo.strPassword = drResult.getString("Password");
+				userInfo.strPhone = drResult.getString("Tel");
+				userInfo.strRealName = realName;
+				userInfo.strRemark = drResult.getString("Remark");
+				userInfo.strUserName = drResult.getString("UserName");
+								
+				strMessage = new StringBuffer("Succeed to get the information of the user.");
+			}
+
+			drResult.close();
+			command.close();
+			return userInfo;
+		} catch (Exception ex) {
+			strMessage = new StringBuffer(ex.getMessage());
+			return null;
+		}
+	}
 	/**
 	 * 通过登陆状态获取用户信息
 	 * @param userName

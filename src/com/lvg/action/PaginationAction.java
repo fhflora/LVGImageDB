@@ -92,6 +92,19 @@ public class PaginationAction extends ActionSupport {
 				userInfoList.add(userInfo);
 			}
 			
+		}else if(qtype.equals("state")){
+			byte state=1;
+			if(query.equals("已登录")){
+				state=0;
+			}
+			userInfo=userManage.getUserInfoByState(state);
+			if(userInfo==null){
+				userInfoList.clear();
+			}
+			else{
+				userInfoList.add(userInfo);
+			}
+			
 		}
 		
 		rows = new ArrayList();
