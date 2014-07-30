@@ -6,6 +6,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.ServletContext;
+
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.SessionAware;
 
@@ -171,16 +173,26 @@ public class UserAction extends ActionSupport implements SessionAware{
 
 		userManage=new UserManage(GetConnection.getConn("Test1"));
 		UserInfo tempUser=userManage.getUserInfo(userInfo.nID);
-		
-		tempUser.setUserName(userInfo.getUserName());
-		tempUser.setRealName(userInfo.getRealName());
-		tempUser.setPassword(userInfo.getPassword());
-		tempUser.setUserType(userInfo.getUserType());
-		tempUser.setEmail(userInfo.getEmail());
-		tempUser.setTel(userInfo.getTel());
-		tempUser.setRemark(userInfo.getRemark());
-		tempUser.setPermission(userInfo.getPermission());
+		if(tempUser.getUserType()==0){
+			tempUser.setUserName(userInfo.getUserName());
+			tempUser.setRealName(userInfo.getRealName());
+			tempUser.setPassword(userInfo.getPassword());
+			tempUser.setUserType(userInfo.getUserType());
+			tempUser.setEmail(userInfo.getEmail());
+			tempUser.setTel(userInfo.getTel());
+			tempUser.setRemark(userInfo.getRemark());
+			tempUser.setPermission(userInfo.getPermission());
+		}
+		else if(tempUser.getUserType()==1){
+			tempUser.setUserName(userInfo.getUserName());
+			tempUser.setRealName(userInfo.getRealName());
+			tempUser.setPassword(userInfo.getPassword());
+			tempUser.setEmail(userInfo.getEmail());
+			tempUser.setTel(userInfo.getTel());
+		}
 		userManage.setUserInfo(tempUser);
+		userInfo=userManage.getUserInfo(userInfo.nID);
+		ServletActionContext.getRequest().getSession().setAttribute("userInfo",userInfo);
 		System.out.println(userManage.getExceMessage());
 		GetConnection.closeAll();
 		this.setMessage("success");

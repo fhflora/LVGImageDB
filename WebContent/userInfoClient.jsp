@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<jsp:directive.page import="com.imagedb.struct.UserInfo"/>
+<%@ page import="java.io.*" %>
+<%@ page import="java.util.*" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="zh-CN">
 <head>
@@ -32,115 +35,98 @@
        <jsp:include page="header.jsp"/>
       <!-- End: Navigation wrapper -->   
   </header>
-  <div class="content">
-    <div class="container">
-		<div class="row">
-        <form class="main form-horizontal" onsubmit="return check()" action="main/active"
-        onsubmit="return check();">
-        <fieldset>
-            <legend>企业信用信息平台开通</legend>
-            <div class="control-group">
-                <label class="control-label">
-                    密码</label>
-                <div class="controls">
-                    <input id="pwd" name="pwd" type="password" placeholder="必填项" class="input-xlarge"
-                        required onchange="checkPasswords()">
-                </div>
-            </div>
-            <div class="control-group">
-                <label class="control-label">
-                    确认密码</label>
-                <div class="controls">
-                    <input id="pwd1" name="pwd1" type="password" placeholder="必填项" class="input-xlarge"
-                        required onchange="checkPasswords()">
-                </div>
-            </div>
-            <div class="control-group">
-                <label class="control-label">
-                    单位名称</label>
-                <div class="controls">
-                    <input name="dept" type="text" placeholder="必填项，单位全称" class="input-xlarge" required>
-                </div>
-            </div>
-            <legend>管理员信息</legend>
-            <div class="control-group">
-                <label class="control-label">
-                    性别</label>
-                <div class="controls">
-                    <label class="radio">
-                        <input type="radio" value="男" name="sex" checked="checked">
-                        男
-                    </label>
-                    <label class="radio">
-                        <input type="radio" value="女" name="sex">
-                        女
-                    </label>
-                </div>
-            </div>
-            <div class="control-group">
-                <label class="control-label">
-                    姓名</label>
-                <div class="controls">
-                    <input name="name" type="text" placeholder="必填项，实名" class="input-xlarge" required>
-                </div>
-            </div>
-            <div class="control-group">
-                <label class="control-label">
-                    办公电话</label>
-                <div class="controls">
-                    <input name="tel" type="text" placeholder="必填项" class="input-xlarge" required>
-                </div>
-            </div>
-            <div class="control-group">
-                <label class="control-label" for="input01">
-                    移动电话</label>
-                <div class="controls">
-                    <input name="phone" type="text" placeholder="必填项" class="input-xlarge" required>
-                </div>
-            </div>
-            <div class="control-group">
-                <label class="control-label">
-                    邮箱</label>
-                <div class="controls">
-                    <input name="email" type="text" placeholder="必填项" class="input-xlarge" required pattern="^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$"
-                        title="邮箱正确格式：xxx@xxx.xxx">
-                </div>
-            </div>
-            <div class="control-group">
-                <label class="control-label">
-                    地址</label>
-                <div class="controls">
-                    <input name="addr" type="text" placeholder="必填项" class="input-xlarge" required>
-                </div>
-            </div>
-            <div class="control-group">
-                <label class="control-label">
-                </label>
-                <div class="controls">
-                    <button class="btn" type="submit" id="ok">
-                        开 通</button>
-                    <button class="btn" type="reset">
-                        重 置</button>
-                </div>
-            </div>
-        </fieldset>
-        </form>
-    </div>
+  <%
+UserInfo user=new UserInfo();
+user=(UserInfo)request.getSession().getAttribute("userInfo");
+%>
+<div class="content">
+	<div class="container">
+	    <div class="row">
+   		  <div class="page-header">
+   		  <h2>账户信息</h2>
+   	      </div>
+	<form action="modifyUserInfoClient.action" method="post">
+	<table style="width:70%;margin-left:15%;">
+	<tr> 
+		<td>用户ID：</td>
+		
+		<td><input type="text" name="userInfo.nID" value="<%=user.getUserID()%>"readonly="readonly"/></td>
+	</tr>
+	<tr> 
+		<td>用户名:</td>
+		<td colspan="2">
+			<input type="text" name="userInfo.strUserName"  id="test1"  value="<%=user.getUserName() %>" readonly="readonly" />
+			</td>
+		<td>
+			<button class="btn btn-small" value="编辑"  id="username" onclick="setvalue('#test1')"  type="button">编辑 </button> 
+		</td>
+	</tr>
+	<tr>
+		<td>真实姓名：</td>
+		<td colspan="2">
+			<input type="text" name="userInfo.strRealName"  id="test2" value="<%=user.getRealName() %>" readonly="readonly">
+		</td>
+		<td>
+			<button class="btn btn-small" value="编辑"  id="submit" type="button" onclick="setvalue('#test2')" >编辑 </button>
+		</td>
+	</tr>
+	<tr>
+		<td>密码：</td>
+		<td colspan="2">
+			<input name="userInfo.strPassword" type="password" id="test3" value="<%=user.getPassword()%>" readonly="readonly">
+		</td>
+		<td>
+			<button class="btn btn-small" value="编辑"  id="submit" type="button" onclick="setvalue('#test3')" >编辑 </button>
+		</td>
+	</tr>
+	<tr>
+		<td>电话：</td>
+		<td colspan="2">
+			<input name="userInfo.strPhone" type="text" id="test4"  value="<%=user.getTel()%>" readonly="readonly">
+		</td>
+		<td>
+			<button class="btn btn-small" value="编辑"  id="submit" type="button" onclick="setvalue('#test4')">编辑 </button>
+		</td>
+	</tr>
+	<tr>
+		<td>邮箱:</td>
+		<td colspan="2">
+		<input type="text" name="userInfo.strEmail" id="test5" value="<%=user.getEmail()%>" readonly="readonly">
+		</td>
+		<td>
+			<button class="btn btn-small" value="编辑"  id="submit"  type="button" onclick="setvalue('#test5')">编辑 </button>
+		</td>
+	</tr>
+	
+	
+	<tr>
+			<td>上次登录时间 </td>
+			<td><%=user.getLastTime() %></td>
+	
+	
+	</tr>
+	
+	<tr>
+	<td colspan="3" style="text-align:right;">
+	
+<button class="btn btn-large" type="submit">提交修改</button>
+
+
+	</td>
+	</tr>
+	</table>
+	</form>
 	</div>
   </div>
-    <script>
-        function checkPasswords() {
-            var passl = document.getElementById("pwd");
-            var pass2 = document.getElementById("pwd1");
-            if (passl.value != pass2.value)
-                passl.setCustomValidity("两次密码必须输入一致！");
-            else
-                passl.setCustomValidity('');
-        }
+</div>
 
-        function check() {
-            document.getElementById('ok').disabled = 'disabled';
-        }
-    </script>
+<script type="text/javascript">
+						
+						function setvalue(id){
+							var changeVal=$(id);
+							 $(changeVal).removeAttr("readonly");																	
+						}
+</script>
+						
 </body>
 </html>
