@@ -84,27 +84,23 @@ public class PaginationAction extends ActionSupport {
 				userInfoList.add(userInfo);
 			}
 		}else if(qtype.equals("realName")){
-			userInfo=userManage.getUserInfoByRealName(query.toString());
-			if(userInfo==null){
-				userInfoList.clear();
-			}
-			else{
-				userInfoList.add(userInfo);
-			}
+			userInfoList=userManage.getUserInfoByRealName(query.toString());	
+			
 			
 		}else if(qtype.equals("state")){
+			//已登录为0   未登录为1
 			byte state=1;
 			if(query.equals("已登录")){
 				state=0;
 			}
-			userInfo=userManage.getUserInfoByState(state);
-			if(userInfo==null){
-				userInfoList.clear();
+			userInfoList=userManage.getUserInfoByState(state);	
+		}else if(qtype.equals("userType")){
+			//用户为1 管理员为0
+			byte userType=1;
+			if(query.equals("管理员")){
+				userType=0;
 			}
-			else{
-				userInfoList.add(userInfo);
-			}
-			
+			userInfoList=userManage.getUserInfoByUserType(userType);	
 		}
 		
 		rows = new ArrayList();

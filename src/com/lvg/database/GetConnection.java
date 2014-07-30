@@ -22,7 +22,7 @@ public class GetConnection {
 	public static Connection getConn(String databaseName) {
 		Connection conn = null;
 		// URL="jdbc:postgresql://localhost:5432/"+databaseName;
-		URL = "jdbc:postgresql://192.168.2.103:5432/" + databaseName;
+		URL = "jdbc:postgresql://localhost:5432/" + databaseName;
 		try {
 			Class.forName(DRIVER);// 加载数据库驱动
 			conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);// 连接数据库

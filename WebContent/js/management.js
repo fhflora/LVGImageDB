@@ -92,7 +92,6 @@ function getUserInfoPageList() {//改过
                    		{display: '用户名', name : 'userName'},
                    		{display: '真实姓名', name : 'realName'},
                    		{display: '用户类型', name : 'userType'},
-                   		{display: '用户权限', name : 'permission'},
                    		{display: '登陆状态', name : 'state'}
                    		],
 			sortname : "serial",

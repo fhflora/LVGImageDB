@@ -3,8 +3,10 @@ package com.imagedb;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
+import java.util.List;
 
 import com.imagedb.struct.UserInfo;
 
@@ -83,9 +85,13 @@ public class UserManage extends ImageDatabase {
 			return false;
 		}
 	}
-
-	public UserInfo getUserInfoByRealName(String realName) {
-		UserInfo userInfo = new UserInfo();
+/**
+ * 通过真实姓名查找
+ * @param realName
+ * @return
+ */
+	public List<UserInfo> getUserInfoByRealName(String realName) {
+        List<UserInfo> userInfoList=new ArrayList<UserInfo>();
 		try {
 			StringBuffer strQuery = new StringBuffer(
 					"select * from \"00002\" where \"RealName\" = ");
@@ -94,49 +100,51 @@ public class UserManage extends ImageDatabase {
 			Statement command = hConnection.createStatement();
 			System.out.println(strQuery.toString());
 			ResultSet drResult = command.executeQuery(strQuery.toString());
-
-			if (!drResult.next()) {
-				userInfo = null;
-				strMessage = new StringBuffer("The user is not exist.");
-			} else {
-				userInfo.nID = drResult.getInt("ID");
-				userInfo.createTime = new Date(drResult.getDate("CreateTime")
-						.getTime());
-				userInfo.lastLoginTime = new Date(drResult.getDate("LastTime")
-						.getTime());
-				userInfo.nPermission = drResult.getByte("Permission");
-				userInfo.nState = drResult.getByte("State");
-				userInfo.nType = drResult.getByte("UserType");
-				userInfo.strCreated = drResult.getString("Created");
-				userInfo.strEmail = drResult.getString("Email");
-				userInfo.strLastLoginIP = drResult.getString("LoginIP");
-				userInfo.strPassword = drResult.getString("Password");
-				userInfo.strPhone = drResult.getString("Tel");
-				userInfo.strRealName = realName;
-				userInfo.strRemark = drResult.getString("Remark");
-				userInfo.strUserName = drResult.getString("UserName");
-
-				strMessage = new StringBuffer(
-						"Succeed to get the information of the user.");
-			}
-
+            while(drResult.next()){
+            	UserInfo userInfo=new UserInfo();
+            	fillRsToUserInfo(drResult, userInfo);
+            	userInfoList.add(userInfo);
+            	
+            }
+			
 			drResult.close();
 			command.close();
-			return userInfo;
+			return userInfoList;
 		} catch (Exception ex) {
 			strMessage = new StringBuffer(ex.getMessage());
 			return null;
 		}
 	}
-
+	public void fillRsToUserInfo(ResultSet drResult,UserInfo userInfo){
+		try{
+			userInfo.nID = drResult.getInt("ID");
+			userInfo.createTime = new Date(drResult.getDate("CreateTime")
+					.getTime());
+			userInfo.lastLoginTime = new Date(drResult.getDate("LastTime")
+					.getTime());
+			userInfo.nPermission = drResult.getByte("Permission");
+			userInfo.nState = drResult.getByte("State");
+			userInfo.nType = drResult.getByte("UserType");
+			userInfo.strCreated = drResult.getString("Created");
+			userInfo.strEmail = drResult.getString("Email");
+			userInfo.strLastLoginIP = drResult.getString("LoginIP");
+			userInfo.strPassword = drResult.getString("Password");
+			userInfo.strPhone = drResult.getString("Tel");
+			userInfo.strRealName = drResult.getString("RealName");
+			userInfo.strRemark = drResult.getString("Remark");
+			userInfo.strUserName = drResult.getString("UserName");
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
 	/**
 	 * 通过登陆状态获取用户信息
 	 * 
 	 * @param userName
 	 * @return
 	 */
-	public UserInfo getUserInfoByState(byte state) {
-		UserInfo userInfo = new UserInfo();
+	public List<UserInfo> getUserInfoByState(byte state) {
+		List<UserInfo> userInfoList=new ArrayList<UserInfo>();
 		try {
 			StringBuffer strQuery = new StringBuffer(
 					"select * from \"00002\" where \"State\" = ");
@@ -145,35 +153,44 @@ public class UserManage extends ImageDatabase {
 			Statement command = hConnection.createStatement();
 			System.out.println(strQuery.toString());
 			ResultSet drResult = command.executeQuery(strQuery.toString());
-
-			if (!drResult.next()) {
-				userInfo = null;
-				strMessage = new StringBuffer("The user is not exist.");
-			} else {
-				userInfo.nID = drResult.getInt("ID");
-				userInfo.createTime = new Date(drResult.getDate("CreateTime")
-						.getTime());
-				userInfo.lastLoginTime = new Date(drResult.getDate("LastTime")
-						.getTime());
-				userInfo.nPermission = drResult.getByte("Permission");
-				userInfo.nState = state;
-				userInfo.nType = drResult.getByte("UserType");
-				userInfo.strCreated = drResult.getString("Created");
-				userInfo.strEmail = drResult.getString("Email");
-				userInfo.strLastLoginIP = drResult.getString("LoginIP");
-				userInfo.strPassword = drResult.getString("Password");
-				userInfo.strPhone = drResult.getString("Tel");
-				userInfo.strRealName = drResult.getString("RealName");
-				userInfo.strRemark = drResult.getString("Remark");
-				userInfo.strUserName = drResult.getString("UserName");
-
-				strMessage = new StringBuffer(
-						"Succeed to get the information of the user.");
+			while(drResult.next()){
+				UserInfo userInfo = new UserInfo();
+				fillRsToUserInfo(drResult, userInfo);
+				userInfoList.add(userInfo);
 			}
-
 			drResult.close();
 			command.close();
-			return userInfo;
+			return userInfoList;
+		} catch (Exception ex) {
+			strMessage = new StringBuffer(ex.getMessage());
+			return null;
+		}
+
+	}
+	/**
+	 * 通过用户类型查找用户信息
+	 * 
+	 * @param userName
+	 * @return
+	 */
+	public List<UserInfo> getUserInfoByUserType(byte userType) {
+		List<UserInfo> userInfoList=new ArrayList<UserInfo>();
+		try {
+			StringBuffer strQuery = new StringBuffer(
+					"select * from \"00002\" where \"UserType\" = ");
+			strQuery.append(userType);
+
+			Statement command = hConnection.createStatement();
+			System.out.println(strQuery.toString());
+			ResultSet drResult = command.executeQuery(strQuery.toString());
+			while(drResult.next()){
+				UserInfo userInfo = new UserInfo();
+				fillRsToUserInfo(drResult, userInfo);
+				userInfoList.add(userInfo);
+			}
+			drResult.close();
+			command.close();
+			return userInfoList;
 		} catch (Exception ex) {
 			strMessage = new StringBuffer(ex.getMessage());
 			return null;
