@@ -69,12 +69,7 @@ margin-top:50px;
 	
 	<div class="content">
 		<div class="container">
-			<div class="row">
-				<span class="span2">
-				 <jsp:include page="search.jsp"></jsp:include>
-				</span>
-				<div style="height: 600px; float: left; margin-left: 20px;margin-top:200px;"></div>
-				
+			<div class="row">			
 				<table id="flex1" style="display: none">
 				</table>
 
