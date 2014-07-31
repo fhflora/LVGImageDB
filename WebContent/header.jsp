@@ -6,7 +6,7 @@
           <div class="container">
             <a href="home.jsp" class="brand brand-bootbus">LVY</a>
   	    	<a href="home.jsp" class="brand lblHeader">浏览影像</a>
-  	    	<a href="#" class="brand lblHeader">上传</a>
+  	    	<a href="upload.jsp" class="brand lblHeader">上传</a>
             <!-- Below button used for responsive navigation -->
             <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
               <span class="icon-bar"></span>

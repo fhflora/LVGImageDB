@@ -34,7 +34,7 @@
 		<action name="modifyUserInfo" class="com.lvg.action.UserAction" method="modifyUserInfo">
 			<result name="success" type="redirect">userInfoList</result>
 		</action>	
-		<action name="modifyUserInfoClient" class="com.lvg.action.UserAction" method="modifyUserInfo">
+		<action name="modifyUserInfoClient" class="com.lvg.action.UserAction" method="modifyUserInfoClient">
 			<result name="success" type="redirect">userInfoClient.jsp</result>
 		</action>	
 		<action name="userLogin" class="com.lvg.action.UserAction" method="userLogin">
