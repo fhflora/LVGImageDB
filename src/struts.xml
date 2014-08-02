@@ -6,8 +6,7 @@
 <struts>
 	<constant name="struts.i18n.encoding" value="UTF-8"/>
 	<constant name="struts.ui.theme" value="simple" />
-	<constant name="struts.multipart.maxSize" value="10701096"/>
-	 
+	<constant name="struts.multipart.maxSize" value="1024102400"/>
 
 	<package name="action" extends="struts-default">	
 		<result-types>
@@ -20,8 +19,19 @@
 				<interceptor-ref name="LoginInterceptor"></interceptor-ref>
 			</interceptor-stack>
 		</interceptors>
+		<action name="uploadFile" class="com.lvg.action.UploadAction">
+			
+			<result name="success">/uploadFile.jsp</result>
+				
+			<interceptor-ref name="fileUpload">
+				<param name="maximumSize">10240000</param> 
+				<param name="fileUpload.allowedTypes">imagepeg,image/bmp,image/gif</param> 
+			</interceptor-ref>		
+			<interceptor-ref name="basicStack">	</interceptor-ref>	
+		</action>
+	
 		<!--获取一个用户Action-->
-			 		
+			 					 		
 		<action name="insertUserInfo" class="com.lvg.action.UserAction" method="insertUserInfo">
 			<result name="success" type="chain">userInfoList</result>
 		</action>			
